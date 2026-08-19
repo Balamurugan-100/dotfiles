@@ -14,7 +14,9 @@ shopt -s histappend checkwinsize
 
 export EDITOR=nvim
 export VISUAL=nvim
-
+export APPLE_API_KEY="$PWD/AuthKey_JWX97Q39TN.p8" 
+export APPLE_API_KEY_ID="JWX97Q39TN" 
+export APPLE_API_ISSUER="69a6de92-69ad-47e3-e053-5b8c7c11a4d1"
 export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_REHASH_DISABLE=1
 

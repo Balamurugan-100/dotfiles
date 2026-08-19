@@ -3,67 +3,52 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
+    animate = { enabled = true },
     bigfile = { enabled = true },
     dashboard = {
       enabled = true,
       preset = {
-        header = [[
-                                                                     
-       ████ ██████           █████      ██                     
-      ███████████             █████                             
-      █████████ ███████████████████ ███   ███████████   
-     █████████  ███    █████████████ █████ ██████████████   
-    █████████ ██████████ █████████ █████ █████ ████ █████   
-  ███████████ ███    ███ █████████ █████ █████ ████ █████  
- ██████  █████████████████████ ████ █████ █████ ████ ██████ 
-        ]],
-      },
-    },
- explorer = { enabled = true },
-    indent = { enabled = true },
-    input = { enabled = true },
-    picker = {
-      enabled = true,
-      backend = "telescope", -- 👈 USE TELESCOPE UI
-      sources = {
-        explorer = {
-          hidden = true, -- 👈 show hidden dotfiles
-          ignored = true, -- 👈 show .gitignored files
+        keys = {
+          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },
     },
-    notifier = { enabled = true },
+    explorer = { enabled = true },
+    git = { enabled = true },
+    gitbrowse = { enabled = true },
+    indent = { enabled = true },
+    input = { enabled = true },
+    lazygit = { enabled = true },
+    notifier = { enabled = true, timeout = 3000 },
     quickfile = { enabled = true },
+    rename = { enabled = true },
     scope = { enabled = true },
+    scratch = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
+    terminal = { enabled = true },
+    toggle = { enabled = true },
     words = { enabled = true },
   },
   keys = {
-    {
-      "<leader>e",
-      function()
-        require("snacks.picker").explorer()
-      end,
-      desc = "Snacks Explorer (root dir)",
-    },
-    {
-      "<leader>E",
-      function()
-        local file = vim.api.nvim_buf_get_name(0)
-        local dir = vim.fn.fnamemodify(file, ":h")
-        require("snacks.picker").explorer({ cwd = dir }) -- ✅ use cwd instead of cd
-      end,
-      desc = "Snacks Explorer (file's dir)",
-    },
-
-    {
-      "<leader>ce",
-      function()
-        local dir = "~/.config/nvim/"
-        require("snacks.picker").explorer({ cwd = dir }) -- ✅ use cwd instead of cd
-      end,
-      desc = "Snacks Explorer (file's dir)",
-    },
+    { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+    { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
+    { "<leader>t", function() Snacks.terminal() end, desc = "Toggle Terminal" },
+    { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+    { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+    { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+    { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+    { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+    { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
   },
 }

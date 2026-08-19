@@ -1,27 +1,47 @@
-vim.g.autoformat = false
-vim.opt.clipboard = "unnamedplus"
-vim.opt.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20"
-vim.g.snacks_animate = false
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
 vim.g.mapleader = " "
-vim.opt.swapfile = false
--- Navigate vim panes better
-vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
-vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
-vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
-vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
+vim.g.maplocalleader = "\\"
 
-vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
-vim.wo.number = true
-vim.filetype.add({
-  pattern = {
-    ["[^/]+/templates/.+%.html"] = "htmldjango",
-    [".*/templates/.+%.html"] = "htmldjango", -- fallback for deeper nesting
-  },
-})
-vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", fg = "#f8f8f2" })  -- brighter text
-vim.api.nvim_set_hl(0, "Comment", { fg = "#8aff80", italic = true })  -- neon green comments
+local opt = vim.opt
 
+opt.autowrite = true
+opt.clipboard = "unnamedplus"
+opt.completeopt = "menu,menuone,noselect"
+opt.confirm = true
+opt.cursorline = true
+opt.expandtab = true
+opt.formatoptions = "jcroqlnt"
+opt.grepformat = "%f:%l:%c:%m"
+opt.grepprg = "rg --vimgrep"
+opt.ignorecase = true
+opt.inccommand = "nosplit"
+opt.laststatus = 3
+opt.list = true
+opt.mouse = "a"
+opt.number = true
+opt.pumblend = 10
+opt.pumheight = 10
+opt.relativenumber = true
+opt.scrolloff = 4
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+opt.shiftround = true
+opt.shiftwidth = 2
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.showmode = false
+opt.sidescrolloff = 8
+opt.signcolumn = "yes"
+opt.smartcase = true
+opt.smartindent = true
+opt.spelllang = { "en" }
+opt.splitbelow = true
+opt.splitkeep = "screen"
+opt.splitright = true
+opt.tabstop = 2
+opt.termguicolors = true
+opt.timeoutlen = 300
+opt.undofile = true
+opt.undolevels = 10000
+opt.updatetime = 200
+opt.virtualedit = "block"
+opt.wildmode = "longest:full,full"
+opt.winminwidth = 5
+opt.wrap = false
