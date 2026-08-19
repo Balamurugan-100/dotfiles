@@ -19,10 +19,9 @@ fish_add_path ~/.antigravity-ide/antigravity-ide/bin
 fish_add_path ~/.local/share/nvm/v22.19.0/bin
 set -gx DATABASE_NAME testpress
 set -gx DATABASE_USER testpress
-set -gx DATABASE_USER_PASSWORD testpress1\$
-set -gx API_ACCESS_KEY f7398573baba47238e5f376b50401856
-set -gx GITHUB_PERSONAL_ACCESS_TOKEN ""
-set -gx SENTRY_AUTH_TOKEN ""
+
+# Source secrets (API keys, tokens, passwords)
+test -f ~/.config/fish/secrets.fish && source ~/.config/fish/secrets.fish
 
 ########## Abbreviations ##########
 
@@ -223,14 +222,6 @@ if status is-interactive
         --git_status=\cs
 
 end
-
-set -x OPENROUTER_API_KEY ""
-
-set -x ANTHROPIC_BASE_URL "https://openrouter.ai/api"
-set -x ANTHROPIC_AUTH_TOKEN $OPENROUTER_API_KEY
-
-# Important: Must be explicitly empty
-set -x ANTHROPIC_API_KEY ""
 
 # Added by Antigravity CLI installer
 set -gx PATH "/Users/bala/.local/bin" $PATH

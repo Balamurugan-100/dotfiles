@@ -1,1 +1,40 @@
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Secrets (NEVER commit)
+fish/.config/fish/secrets.fish
+.env
+.envrc
+*.secret
+
+# Tmux plugins (installed by TPM)
+tmux/.config/tmux/plugins/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv_*/
+*.egg-info/
+
+# Node
+node_modules/
+.npm/
+
+# Rust
+target/
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Misc
+*.log
+*.bak
+*.backup

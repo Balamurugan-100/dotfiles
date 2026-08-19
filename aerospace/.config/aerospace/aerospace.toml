@@ -1,0 +1,90 @@
+# ── Startup ──────────────────────────────────────────
+start-at-login = true
+
+# ── Gaps ─────────────────────────────────────────────
+# [gaps]
+# inner.horizontal = 3
+# inner.vertical   = 3
+# outer.left       = 3
+# outer.right      = 3
+# outer.top        = 3
+# outer.bottom     = 3
+
+# ── Bindings ─────────────────────────────────────────
+[mode.main.binding]
+
+# Workspaces (numbers)
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# Workspaces (letters)
+alt-q = 'workspace Q'
+alt-w = 'workspace W'
+alt-e = 'workspace E'
+alt-r = 'workspace R'
+alt-u = 'workspace U'
+alt-i = 'workspace I'
+alt-o = 'workspace O'
+alt-p = 'workspace P'
+
+# Move window to workspace (numbers)
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+
+# Move window to workspace (letters)
+# alt-shift-q = 'move-node-to-workspace Q'
+alt-shift-w = 'move-node-to-workspace W'
+# alt-shift-e = 'move-node-to-workspace E'
+# alt-shift-r = 'move-node-to-workspace R'
+alt-shift-u = 'move-node-to-workspace U'
+alt-shift-i = 'move-node-to-workspace I'
+alt-shift-o = 'move-node-to-workspace O'
+alt-shift-p = 'move-node-to-workspace P'
+
+# Focus within workspace
+alt-j = 'focus left'
+alt-k = 'focus right'
+
+# Cycle workspaces
+alt-h = 'workspace --wrap-around prev'
+alt-l = 'workspace --wrap-around next'
+alt-tab       = 'workspace-back-and-forth'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Move window
+alt-shift-h = 'move left'
+alt-shift-l = 'move right'
+alt-shift-k = 'move up'
+alt-shift-j = 'move down'
+
+# Resize
+alt-comma  = 'resize smart -50'
+alt-period = 'resize smart +50'
+
+# Layout
+alt-f       = 'fullscreen'
+alt-shift-f = 'macos-native-fullscreen'
+alt-t       = 'layout floating tiling'
+alt-s       = 'layout tiles horizontal vertical'
+
+# Terminal
+alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+
+# Misc
+alt-shift-q = 'close'
+alt-shift-r = 'reload-config'
+alt-shift-e = 'close-all-windows-but-current'
