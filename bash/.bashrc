@@ -14,15 +14,14 @@ shopt -s histappend checkwinsize
 
 export EDITOR=nvim
 export VISUAL=nvim
-export APPLE_API_KEY="$PWD/AuthKey_JWX97Q39TN.p8" 
-export APPLE_API_KEY_ID="JWX97Q39TN" 
-export APPLE_API_ISSUER="69a6de92-69ad-47e3-e053-5b8c7c11a4d1"
 export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_REHASH_DISABLE=1
 
+# Non-secret DB config (local dev)
 export DATABASE_NAME=testpress
 export DATABASE_USER=testpress
-export DATABASE_USER_PASSWORD='testpress1$'
+# DATABASE_USER_PASSWORD and APPLE_* keys now live in ~/.config/bash/secrets.sh (gitignored, like .env)
+# See bash/.config/bash/secrets.sh.template
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 

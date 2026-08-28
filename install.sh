@@ -102,13 +102,22 @@ for pkg in "${config_packages[@]}"; do
     fi
 done
 
-# ─── 6. Create secrets file if it doesn't exist ──────────────────────────────
+# ─── 6. Create secrets files if they don't exist ─────────────────────────────
 SECRETS_FILE="$HOME/.config/fish/secrets.fish"
 if [[ ! -f "$SECRETS_FILE" ]]; then
     info "Creating secrets.fish from template..."
     cp "$DOTFILES_DIR/fish/.config/fish/secrets.fish.template" "$SECRETS_FILE"
     chmod 600 "$SECRETS_FILE"
     warn "Please edit $SECRETS_FILE with your actual API keys and tokens"
+fi
+
+BASH_SECRETS_FILE="$HOME/.config/bash/secrets.sh"
+if [[ ! -f "$BASH_SECRETS_FILE" ]]; then
+    info "Creating bash secrets.sh from template..."
+    mkdir -p "$(dirname "$BASH_SECRETS_FILE")"
+    cp "$DOTFILES_DIR/bash/.config/bash/secrets.sh.template" "$BASH_SECRETS_FILE"
+    chmod 600 "$BASH_SECRETS_FILE"
+    warn "Please edit $BASH_SECRETS_FILE with your actual API keys and tokens"
 fi
 
 # ─── 7. TPM (Tmux Plugin Manager) ────────────────────────────────────────────
@@ -158,7 +167,8 @@ echo ""
 info "✅ Dotfiles setup complete!"
 echo ""
 echo "  Packages stowed: ${#config_packages[@]} config + ${#home_packages[@]} home"
-echo "  Secrets file:    $SECRETS_FILE"
+echo "  Secrets files:   $SECRETS_FILE"
+echo "                   $BASH_SECRETS_FILE"
 echo ""
 echo "  Next steps:"
 echo "    1. Edit secrets.fish with your API keys"

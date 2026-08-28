@@ -20,7 +20,7 @@ fish_add_path ~/.antigravity-ide/antigravity-ide/bin
 set -gx DATABASE_NAME testpress
 set -gx DATABASE_USER testpress
 
-# Source secrets (API keys, tokens, passwords)
+# Source secrets (API keys, tokens, passwords) — secrets.fish is gitignored like .env
 test -f ~/.config/fish/secrets.fish && source ~/.config/fish/secrets.fish
 
 ########## Abbreviations ##########
@@ -225,6 +225,7 @@ end
 
 # Added by Antigravity CLI installer
 set -gx PATH "/Users/bala/.local/bin" $PATH
+# APPLE_* keys now live in secrets.fish (gitignored) — see secrets.fish.template
 export ANDROID_HOME=$HOME/Library/Android/sdk
 fish_add_path $ANDROID_HOME/cmdline-tools/latest/bin
 fish_add_path $ANDROID_HOME/platform-tools

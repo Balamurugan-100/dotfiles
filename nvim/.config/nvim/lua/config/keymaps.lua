@@ -100,3 +100,6 @@ map("n", "Y", "y$", { desc = "Yank to end of line" })
 -- Better Indentation in visual mode (keeps the text selected)
 map("v", "<", "<gv", { desc = "Indent Left" })
 map("v", ">", ">gv", { desc = "Indent Right" })
+
+-- Markdown
+map("n", "<leader>mp", "<cmd>MarkdownPreview<cr>", { desc = "Markdown Preview in Browser" })

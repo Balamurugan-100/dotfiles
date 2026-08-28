@@ -48,7 +48,9 @@ export GIT_EDITOR='nvim'
 ### === Database Env (local dev only) === ###
 export DATABASE_NAME="testpress"
 export DATABASE_USER="testpress"
-export DATABASE_USER_PASSWORD="testpress1$"
+# DATABASE_USER_PASSWORD lives in secrets (gitignored, like .env) — see secrets.sh.template
+[[ -f ~/.config/bash/secrets.sh ]] && source ~/.config/bash/secrets.sh
+# Or for zsh-specific: [[ -f ~/.config/zsh/secrets.zsh ]] && source ~/.config/zsh/secrets.zsh
 
 ### === Starship Prompt === ###
 eval "$(starship init zsh)"

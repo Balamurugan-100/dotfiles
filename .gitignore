@@ -5,9 +5,13 @@
 
 # Secrets (NEVER commit)
 fish/.config/fish/secrets.fish
+bash/.config/bash/secrets.sh
 .env
 .envrc
 *.secret
+**/secrets.fish
+**/secrets.sh
+**/secrets.zsh
 
 # Tmux plugins (installed by TPM)
 tmux/.config/tmux/plugins/

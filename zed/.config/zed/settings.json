@@ -24,6 +24,8 @@
     "mode": "eager"
   },
 "agent": {
+  "dock": "right",
+  "sidebar_side": "right",
   "show_turn_stats": true,
   "single_file_review": true,
   "tool_permissions": {
@@ -60,6 +62,12 @@
   "buffer_font_size": 15,
   "theme": "Catppuccin Macchiato",
   "agent_servers": {
+    "antigravity-acp": {
+      "default_config_options": {
+        "mode": "yolo"
+      },
+      "type": "registry"
+    },
     "OpenCode": {
       "type": "custom",
       "command": "opencode",
