@@ -16,6 +16,7 @@ set -Ux PYENV_REHASH_DISABLE 1
 fish_add_path $PYENV_ROOT/bin
 fish_add_path ~/.antigravity/antigravity/bin
 fish_add_path ~/.antigravity-ide/antigravity-ide/bin
+fish_add_path ~/bin/
 # fish_add_path ~/.local/share/nvm/v22.19.0/bin
 set -gx DATABASE_NAME testpress
 set -gx DATABASE_USER testpress
@@ -41,7 +42,7 @@ abbr -a gpl git pull
 abbr -a gps git push
 abbr -a lg lazygit
 abbr -a ld lazydocker
-abbr -a l 'eza -l --icons'
+abbr -a l 'eza -l --icons always'
 
 abbr -a gcmsg --set-cursor 'git commit -m "%"'
 abbr -a gcam --set-cursor 'git commit -am "%"'
@@ -245,3 +246,6 @@ fish_add_path /home/kaizen/.strix/bin
 export LANG=en_IN.utf8
 export LC_ALL=en_IN.utf8
 
+
+# opencode
+fish_add_path /home/kaizen/.opencode/bin
