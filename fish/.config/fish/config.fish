@@ -6,6 +6,7 @@ if status is-login
     fish_add_path /opt/homebrew/bin
     fish_add_path ~/.local/bin
     fish_add_path ~/.cargo/bin
+    fish_add_path ~/bin
 end
 
 ########## Environment ##########
@@ -247,5 +248,4 @@ export LANG=en_IN.utf8
 export LC_ALL=en_IN.utf8
 
 
-# opencode
 fish_add_path /home/kaizen/.opencode/bin
