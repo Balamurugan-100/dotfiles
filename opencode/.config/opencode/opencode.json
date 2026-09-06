@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "~/.config/opencode/instructions/morph-tools.md"
+  ],
+  "plugin": [
+    "@tarquinen/opencode-dcp@latest",
+    "opencode-goal-plugin",
+    "opencode-supermemory",
+    "github:JRedeker/opencode-morph-fast-apply",
+    "opencode-firecrawl",
+    "opencode-pty",
+    "opencode-vibeguard"
+  ],
+  "command": {
+    "goal": {
+      "description": "Set a session-scoped goal and auto-continue until complete.",
+      "template": "$ARGUMENTS",
+      "agent": "build"
+    }
+  }
+}

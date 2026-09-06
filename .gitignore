@@ -42,3 +42,4 @@ target/
 *.log
 *.bak
 *.backup
+.personal/

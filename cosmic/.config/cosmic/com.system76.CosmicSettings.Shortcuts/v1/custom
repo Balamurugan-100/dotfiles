@@ -1,0 +1,27 @@
+{
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "space",
+        description: Some("Launcher"),
+    ): Spawn("vicinae toggle"),
+    (
+        modifiers: [
+            Super,
+        ],
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Escape",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "v",
+        description: Some("cliboard history"),
+    ): Spawn("vicinae vicinae://launch/clipboard/history"),
+}

@@ -1,0 +1,32 @@
+{
+  "enabled": true,
+  "debug": false,
+  "placeholder_prefix": "__VG_",
+  "session": {
+    "ttl": "1h",
+    "max_mappings": 100000
+  },
+  "patterns": {
+    "keywords": [],
+    "regex": [
+      { "pattern": "sk-[A-Za-z0-9]{48}", "category": "OPENAI_KEY" },
+      { "pattern": "(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]+", "category": "GITHUB_TOKEN" },
+      { "pattern": "AKIA[0-9A-Z]{16}", "category": "AWS_ACCESS_KEY" },
+      { "pattern": "AIza[0-9A-Za-z_-]{35}", "category": "GOOGLE_API_KEY" },
+      { "pattern": "pk_live_[0-9A-Za-z]+", "category": "STRIPE_PK" },
+      { "pattern": "sk_live_[0-9A-Za-z]{20,}", "category": "STRIPE_SK" },
+      { "pattern": "xox[baprs]-[0-9A-Za-z-]{10,}", "category": "SLACK_TOKEN" },
+      { "pattern": "Bearer [A-Za-z0-9._~+/-]+=*", "category": "BEARER_TOKEN" }
+    ],
+    "builtin": ["email", "uuid", "ipv4", "mac"],
+    "exclude": [
+      "example.com",
+      "localhost",
+      "127.0.0.1",
+      "0.0.0.0",
+      "*.opencode.ai",
+      "github.com",
+      "npmjs.com"
+    ]
+  }
+}
