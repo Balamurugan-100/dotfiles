@@ -7,9 +7,10 @@
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
 
-      "cmd-shift-t": "workspace::NewCenterTerminal",
-      "ctrl-shift-t": "workspace::NewCenterTerminal",
-    },
+      "ctrl-b": "workspace::ToggleLeftDock",
+      "ctrl-w": "pane::CloseActiveItem",
+
+    }
   },
 
   {
@@ -17,14 +18,18 @@
     "bindings": {
       "ctrl-k": "workspace::ActivateNextPane",
       "ctrl-s": ["terminal::SendKeystroke", "ctrl-s"],
-    },
+      "ctrl-w": "pane::CloseActiveItem"
+    }
   },
+
   {
     "context": "ProjectPanel",
     "bindings": {
       "ctrl-l": "workspace::ActivateNextPane",
-      "space e": "workspace::ToggleLeftDock",
-    },
+      "ctrl-b": "workspace::ToggleLeftDock",
+      "ctrl-w": "pane::CloseActiveItem",
+      "space e": "workspace::ToggleLeftDock"
+    }
   },
 
   {
@@ -35,8 +40,8 @@
       "d": "project_panel::Delete",
       "r": "project_panel::Rename",
       "y": "workspace::CopyPath",
-      "enter": "project_panel::Open",
-    },
+      "enter": "project_panel::Open"
+    }
   },
 
   {
@@ -46,17 +51,20 @@
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
+
+      "ctrl-b": "workspace::ToggleLeftDock",
+      "ctrl-w": "pane::CloseActiveItem",
+
       "space e": "workspace::ToggleLeftDock",
-      "ctrl-a": "editor::SelectAll",
-    },
+      "ctrl-a": "editor::SelectAll"
+    }
   },
 
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       "j k": "vim::NormalBefore",
-      "j j": "vim::NormalBefore",
-    },
-  },
+      "j j": "vim::NormalBefore"
+    }
+  }
 ]
-
