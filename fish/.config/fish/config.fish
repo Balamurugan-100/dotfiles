@@ -242,7 +242,6 @@ end
 source ~/.config/fish/functions/dev.fish
 atuin init fish | source
 
-fish_add_path /home/kaizen/.strix/bin
 
 export LANG=en_IN.utf8
 export LC_ALL=en_IN.utf8
