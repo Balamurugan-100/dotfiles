@@ -246,5 +246,5 @@ atuin init fish | source
 export LANG=en_IN.utf8
 export LC_ALL=en_IN.utf8
 
-
+source ~/.config/fish/secrets.fish
 fish_add_path /home/kaizen/.opencode/bin
