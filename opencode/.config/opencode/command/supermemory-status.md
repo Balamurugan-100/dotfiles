@@ -7,7 +7,7 @@ description: Show Supermemory connection status
 Run this command to check whether OpenCode is connected to Supermemory:
 
 ```bash
-npx --yes opencode-supermemory@latest status
+bunx opencode-supermemory@latest status
 ```
 
 Report the connection status, credential source, API URL, and account information if available.
