@@ -248,3 +248,7 @@ export LC_ALL=en_IN.utf8
 
 source ~/.config/fish/secrets.fish
 fish_add_path /home/kaizen/.opencode/bin
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :

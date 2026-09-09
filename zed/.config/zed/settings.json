@@ -1,10 +1,12 @@
 {
+  "diff_view_style": "split",
   "cli_default_open_behavior": "existing_window",
   "session": {
     "trust_all_worktrees": true
   },
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "terminal": {
+    "font_family": "FiraCode Nerd Font Mono",
     "dock": "right"
   },
   "project_panel": {
@@ -16,7 +18,7 @@
     "metrics": false
   },
   "edit_predictions": {
-    "provider": "copilot",
+    "provider": "zed",
     "mode": "subtle"
   },
 "agent": {
@@ -67,8 +69,13 @@
   },
   "agent_servers": {
     "antigravity-acp": {
+      "favorite_config_option_values": {
+        "model": [
+          "gemini-3.1-pro-low"
+        ]
+      },
       "default_config_options": {
-        "model": "gemini-3.1-pro-low",
+        "model": "gemini-3.7-flash-high",
         "mode": "yolo"
       },
       "type": "registry"

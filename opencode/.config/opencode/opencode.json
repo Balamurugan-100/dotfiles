@@ -1,8 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": [
-    "~/.config/opencode/instructions/morph-tools.md"
-  ],
+
+  "instructions": ["~/.config/opencode/instructions/morph-tools.md"],
+
   "plugin": [
     "@tarquinen/opencode-dcp@latest",
     "opencode-goal-plugin",
@@ -12,6 +12,7 @@
     "opencode-pty",
     "opencode-vibeguard"
   ],
+
   "command": {
     "goal": {
       "description": "Set a session-scoped goal and auto-continue until complete.",
@@ -19,15 +20,68 @@
       "agent": "build"
     }
   },
+
   "mcp": {
     "sentry": {
       "type": "local",
       "command": ["npx", "-y", "@sentry/mcp-server"],
       "enabled": true,
+      "timeout": 10000,
       "environment": {
         "SENTRY_ACCESS_TOKEN": "{env:SENTRY_AUTH_TOKEN}",
         "SENTRY_HOST": "sentry.testpress.in"
       }
+    },
+    "outline": {
+      "type": "remote",
+      "url": "https://hub.testpress.tech/mcp",
+      "enabled": true,
+      "timeout": 10000
+    },
+
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "timeout": 10000
+    },
+
+    "gh_grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true,
+      "timeout": 10000
+    },
+
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp"],
+      "enabled": true,
+      "timeout": 10000
     }
+  },
+
+  "compaction": {
+    "auto": true,
+    "prune": true
+  },
+
+  "watcher": {
+    "ignore": [
+      "**/node_modules/**",
+      "**/.git/**",
+      "**/build/**",
+      "**/.gradle/**",
+      "**/dist/**",
+      "**/coverage/**",
+      "**/__pycache__/**",
+      "**/.venv/**"
+    ]
+  },
+
+  "permission": {
+    "bash": "ask",
+    "edit": "allow",
+    "webfetch": "allow"
   }
 }
