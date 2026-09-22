@@ -2,6 +2,9 @@
 
 set -g fish_greeting
 
+set -Ux EDITOR nvim
+set -Ux VISUAL nvim
+
 if status is-login
     fish_add_path /opt/homebrew/bin
     fish_add_path ~/.local/bin
@@ -241,7 +244,6 @@ end
 # pnpm end
 source ~/.config/fish/functions/dev.fish
 atuin init fish | source
-
 
 export LANG=en_IN.utf8
 export LC_ALL=en_IN.utf8
