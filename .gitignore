@@ -43,3 +43,6 @@ target/
 *.bak
 *.backup
 .personal/
+*.mdb
+*mdb/
+*.db
