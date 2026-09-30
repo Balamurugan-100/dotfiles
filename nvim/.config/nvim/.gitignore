@@ -6,3 +6,10 @@ debug
 foo.*
 *.log
 data
+
+# Local LazyVim state (per-machine: enabled extras, NEWS version).
+# lazy-lock.json is intentionally NOT ignored - it pins plugin versions.
+lazyvim.json
+
+# Leftover from a previous nvim-pack setup; no longer used.
+nvim-pack-lock.json

@@ -5,23 +5,8 @@
 
   "plugin": [
     "@tarquinen/opencode-dcp@latest",
-    "opencode-goal-plugin",
-    "opencode-supermemory",
-    "github:JRedeker/opencode-morph-fast-apply",
-    "opencode-firecrawl",
-    "opencode-pty",
-    "opencode-vibeguard"
   ],
-
-  "command": {
-    "goal": {
-      "description": "Set a session-scoped goal and auto-continue until complete.",
-      "template": "$ARGUMENTS",
-      "agent": "build"
-    }
-  },
-
-  "mcp": {
+"mcp": {
     "sentry": {
       "type": "local",
       "command": ["npx", "-y", "@sentry/mcp-server"],
@@ -32,12 +17,12 @@
         "SENTRY_HOST": "sentry.testpress.in"
       }
     },
-    "outline": {
-      "type": "remote",
-      "url": "https://hub.testpress.tech/mcp",
-      "enabled": true,
-      "timeout": 10000
-    },
+    // "outline": {
+    //   "type": "remote",
+    //   "url": "https://hub.testpress.tech/mcp",
+    //   "enabled": true,
+    //   "timeout": 10000
+    // },
 
     "context7": {
       "type": "remote",

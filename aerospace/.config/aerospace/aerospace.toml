@@ -25,6 +25,7 @@ alt-u = 'workspace U'
 alt-i = 'workspace I'
 alt-o = 'workspace O'
 alt-p = 'workspace P'
+alt-s = 'workspace S'
 
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
@@ -42,10 +43,12 @@ alt-shift-u = 'move-node-to-workspace U'
 alt-shift-i = 'move-node-to-workspace I'
 alt-shift-o = 'move-node-to-workspace O'
 alt-shift-p = 'move-node-to-workspace P'
+alt-shift-s = 'move-node-to-workspace S'
 
 alt-h = 'workspace --wrap-around prev'
 alt-l = 'workspace --wrap-around next'
-
+alt-j = 'focus left'
+alt-k = 'focus right'
 alt-tab = 'workspace-back-and-forth'
 
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
@@ -60,7 +63,6 @@ alt-f = 'fullscreen'
 alt-shift-f = 'macos-native-fullscreen'
 
 alt-t = 'layout floating tiling'
-alt-s = 'layout tiles horizontal vertical'
 
 alt-enter = 'exec-and-forget open -n /Applications/Kitty.app'
 
