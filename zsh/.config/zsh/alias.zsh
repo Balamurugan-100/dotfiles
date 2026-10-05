@@ -1,0 +1,5 @@
+alias l='nls -l'
+alias v='nvim'
+alias c='clear'
+alias astro='NVIM_APPNAME=astro nvim'
+alias gs='git status'

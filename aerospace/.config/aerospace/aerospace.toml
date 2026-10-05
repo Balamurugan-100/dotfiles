@@ -96,4 +96,4 @@ run = 'move-node-to-workspace P'
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace 0'
+run = 'move-node-to-workspace S'
