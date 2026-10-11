@@ -9,7 +9,6 @@ source "$ZINIT_HOME/zinit.zsh"
 
 
 source ~/.config/zsh/keybind.zsh
-source ~/.config/zsh/tools.zsh
 source ~/.config/zsh/completion.zsh
 source ~/.config/zsh/alias.zsh
 source ~/.config/zsh/history.zsh
@@ -20,4 +19,5 @@ source ~/.config/zsh/path.zsh
 
 source ~/.config/zsh/functions.zsh
 
+source ~/.config/zsh/tools.zsh
 fastfetch
