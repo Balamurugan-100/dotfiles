@@ -1,0 +1,152 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+version = 4
+final_space = true
+
+# NEON//SHINOBI — developer HUD
+
+# ── MAIN PROMPT ────────────────────────────────────────────
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = false
+
+# Identity
+[[blocks.segments]]
+type = "text"
+style = "plain"
+foreground = "#F472B6"
+template = " 󰀄 {{ .UserName }} "
+
+[[blocks.segments]]
+type = "text"
+style = "plain"
+foreground = "#334155"
+template = "│ "
+
+# Directory
+[[blocks.segments]]
+type = "path"
+style = "plain"
+foreground = "#22D3EE"
+template = " {{ .Path }} "
+
+[blocks.segments.options]
+style = "folder"
+max_depth = 3
+
+# Git
+[[blocks.segments]]
+type = "git"
+style = "plain"
+foreground = "#A78BFA"
+template = " {{ .HEAD }}{{ if .Working.Changed }} <#FBBF24>●</>{{ end }}{{ if .Staging.Changed }} <#34D399>✓</>{{ end }}{{ if .Behind }} <#F87171>↓{{ .Behind }}</>{{ end }}{{ if .Ahead }} <#34D399>↑{{ .Ahead }}</>{{ end }} "
+
+[blocks.segments.options]
+branch_icon = ""
+fetch_status = true
+
+# ── LANGUAGE / ENVIRONMENT INDICATORS ─────────────────────
+# These appear when relevant to the current project.
+
+# Python + active virtualenv
+[[blocks.segments]]
+type = "python"
+style = "plain"
+foreground = "#FBBF24"
+template = " {{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }} "
+
+[blocks.segments.options]
+display_mode = "environment"
+fetch_virtual_env = true
+display_default = false
+
+# Go
+[[blocks.segments]]
+type = "go"
+style = "plain"
+foreground = "#22D3EE"
+template = " {{ .Full }} "
+
+[blocks.segments.options]
+display_mode = "context"
+
+# Rust
+[[blocks.segments]]
+type = "rust"
+style = "plain"
+foreground = "#F97316"
+template = " {{ .Full }} "
+
+[blocks.segments.options]
+display_mode = "context"
+
+# Node.js + package manager
+[[blocks.segments]]
+type = "node"
+style = "plain"
+foreground = "#A6E3A1"
+template = " {{ .Full }}{{ if .PackageManagerIcon }} {{ .PackageManagerIcon }}{{ end }} "
+
+[blocks.segments.options]
+display_mode = "context"
+fetch_package_manager = true
+
+# Bun
+[[blocks.segments]]
+type = "bun"
+style = "plain"
+foreground = "#F9E2AF"
+template = " {{ .Full }} "
+
+[blocks.segments.options]
+display_mode = "context"
+
+# ── RIGHT SIDE ────────────────────────────────────────────
+
+[[blocks]]
+type = "rprompt"
+alignment = "right"
+
+# Execution time for the previous command
+[[blocks.segments]]
+type = "executiontime"
+style = "plain"
+foreground = "#FBBF24"
+template = "◷ {{ .FormattedMs }} "
+
+[blocks.segments.options]
+threshold = 2000
+
+# Show failures, not a fake ONLINE status
+[[blocks.segments]]
+type = "status"
+style = "plain"
+foreground = "#F87171"
+template = "{{ if ne .Code 0 }}✘ {{ .Code }} {{ end }}"
+
+[blocks.segments.options]
+always_enabled = true
+
+# Clock
+[[blocks.segments]]
+type = "time"
+style = "plain"
+foreground = "#64748B"
+template = "󰥔 {{ .CurrentDate | date .Format }} "
+
+[blocks.segments.options]
+time_format = "15:04"
+
+# ── COMMAND LINE ──────────────────────────────────────────
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+[[blocks.segments]]
+type = "text"
+style = "plain"
+foreground = "#22D3EE"
+template = "╰─ ❯ "

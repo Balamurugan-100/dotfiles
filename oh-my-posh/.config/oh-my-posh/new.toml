@@ -1,159 +1,136 @@
 "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+final_space = true
 version = 4
 
-final_space = true
-
-
-# ═════════════════════════════════════════════
-# RIGHT PROMPT
-# ═════════════════════════════════════════════
-
 [[blocks]]
-type = "rprompt"
 alignment = "right"
+type = "prompt"
 
-
-# Full path
 [[blocks.segments]]
-type = "path"
+background = "#29315A"
+foreground = "#E64747"
+leading_diamond = ""
 style = "diamond"
-background = "#1F2335"
-foreground = "#7AA2F7"
-leading_diamond = "  "
+template = "{{ .UserName }}"
+trailing_diamond = " "
+type = "session"
+
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#3EC669"
+leading_diamond = ""
+style = "diamond"
+template = " {{ .Path }}"
 trailing_diamond = ""
-template = "    {{ .Path }}  "
+type = "path"
 
 [blocks.segments.options]
-style = "full"
+style = "folder"
 
-
-# Git
 [[blocks.segments]]
-type = "git"
+background = "#29315A"
+foreground = "#43CCEA"
+leading_diamond = " "
 style = "diamond"
-background = "#1F2335"
-foreground = "#BB9AF7"
-leading_diamond = "  "
+template = "{{ .HEAD }}"
 trailing_diamond = ""
-template = "    {{ .HEAD }}{{ if .Working.Changed }}  ✘{{ end }}{{ if .Staging.Changed }}  ●{{ end }}  "
+type = "git"
 
 [blocks.segments.options]
 branch_icon = ""
 
-
-# Python
 [[blocks.segments]]
+background = "#29315A"
+foreground = "#E4F34A"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+trailing_diamond = ""
 type = "python"
-style = "diamond"
-background = "#1F2335"
-foreground = "#E0AF68"
-leading_diamond = "  "
-trailing_diamond = ""
-template = "    {{ if .Venv }}{{ .Venv }} · {{ end }}{{ .Full }}  "
 
-
-# Go
 [[blocks.segments]]
+background = "#29315A"
+foreground = "#7FD5EA"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+trailing_diamond = ""
 type = "go"
-style = "diamond"
-background = "#1F2335"
-foreground = "#7DCFFF"
-leading_diamond = "  "
-trailing_diamond = ""
-template = "    {{ .Full }}  "
 
-
-# Node
 [[blocks.segments]]
+background = "#29315A"
+foreground = "#42E66C"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
+trailing_diamond = ""
 type = "node"
-style = "diamond"
-background = "#1F2335"
-foreground = "#9ECE6A"
-leading_diamond = "  "
-trailing_diamond = ""
-template = "    {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}  "
 
-
-# Rust
 [[blocks.segments]]
-type = "rust"
+background = "#29315A"
+foreground = "#E64747"
+leading_diamond = " "
 style = "diamond"
-background = "#1F2335"
-foreground = "#FF9E64"
-leading_diamond = "  "
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
 trailing_diamond = ""
-template = "    {{ .Full }}  "
-
-
-# Ruby
-[[blocks.segments]]
 type = "ruby"
-style = "diamond"
-background = "#1F2335"
-foreground = "#F7768E"
-leading_diamond = "  "
-trailing_diamond = ""
-template = "    {{ .Full }}  "
 
-
-# Java
 [[blocks.segments]]
+background = "#29315A"
+foreground = "#E64747"
+leading_diamond = " "
+style = "diamond"
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+trailing_diamond = ""
 type = "java"
-style = "diamond"
-background = "#1F2335"
-foreground = "#F7768E"
-leading_diamond = "  "
-trailing_diamond = ""
-template = "    {{ .Full }}  "
 
-
-# Battery
 [[blocks.segments]]
-type = "battery"
+background = "#29315A"
+foreground = "#9B6BDF"
+leading_diamond = " "
 style = "diamond"
-background = "#1F2335"
-foreground = "#9ECE6A"
-leading_diamond = "  "
+template = "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
 trailing_diamond = ""
-template = "  {{ .Icon }}  {{ .Percentage }}%  "
+type = "julia"
 
-foreground_templates = [
-  "{{ if eq \"Charging\" .State.String }}#7DCFFF{{ end }}",
-  "{{ if eq \"Discharging\" .State.String }}#E0AF68{{ end }}",
-  "{{ if eq \"Full\" .State.String }}#9ECE6A{{ end }}"
-]
+[[blocks.segments]]
+background = "#29315A"
+foreground = "#9B6BDF"
+foreground_templates = [ "{{if eq \"Charging\" .State.String}}#40c4ff{{end}}", "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}", "{{if eq \"Full\" .State.String}}#4caf50{{end}}" ]
+leading_diamond = " "
+style = "diamond"
+template = "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}"
+trailing_diamond = ""
+type = "battery"
 
 [blocks.segments.options]
-charged_icon = "󰁹 "
-charging_icon = "󰂄 "
-discharging_icon = "󰁻 "
-
-
-# ═════════════════════════════════════════════
-# LEFT PROMPT
-# ═════════════════════════════════════════════
+charged_icon = " "
+charging_icon = "⇡ "
+discharging_icon = "⇣ "
 
 [[blocks]]
-type = "prompt"
 alignment = "left"
+newline = true
+type = "prompt"
 
-
-# User
 [[blocks.segments]]
-type = "session"
-style = "diamond"
-background = "#7AA2F7"
-foreground = "#1A1B26"
+background = "#29315A"
+foreground = "#AEA4BF"
 leading_diamond = ""
-trailing_diamond = ""
-template = "  {{ .UserName }}  "
+style = "diamond"
+template = "{{ .FormattedMs }}"
+trailing_diamond = " "
+type = "executiontime"
 
+[blocks.segments.options]
+style = "austin"
+threshold = 150
 
-# Spacing
 [[blocks.segments]]
+background = "#29315A"
+foreground = "#7FD5EA"
+leading_diamond = ""
+style = "diamond"
+template = "❯"
+trailing_diamond = ""
 type = "text"
-style = "plain"
-foreground = "#565F89"
-template = "    "
-
-

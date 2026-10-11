@@ -1,0 +1,9 @@
+tmux
+neovim
+fzf
+zoxide
+zsh
+jq
+git
+oh-my-posh
+stow

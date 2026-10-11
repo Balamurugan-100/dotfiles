@@ -97,3 +97,8 @@ run = 'move-node-to-workspace P'
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = 'move-node-to-workspace S'
+
+
+[[on-window-detected]]
+if.app-id = 'dev.openpets.app'
+run = 'layout floating'

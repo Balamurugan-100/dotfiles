@@ -8,6 +8,7 @@ path=(
   "/opt/homebrew/bin"
   "/opt/homebrew/sbin"
 
+  "$HOME/.opencode/bin"
   # Python
   "$PYENV_ROOT/bin"
 
