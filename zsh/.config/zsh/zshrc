@@ -1,3 +1,8 @@
+# ── Environment ───────────────────────────────
+source ~/.config/zsh/env.zsh
+source ~/.config/zsh/path.zsh
+
+# ── Zinit ─────────────────────────────────────
 ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
 
 if [[ ! -d "$ZINIT_HOME" ]]; then
@@ -7,17 +12,18 @@ fi
 
 source "$ZINIT_HOME/zinit.zsh"
 
-
-source ~/.config/zsh/path.zsh
+# ── Shell config ──────────────────────────────
 source ~/.config/zsh/keybind.zsh
-source ~/.config/zsh/completion.zsh
 source ~/.config/zsh/alias.zsh
 source ~/.config/zsh/history.zsh
 source ~/.config/zsh/plugins.zsh
 source ~/.config/zsh/snippets.zsh
-source ~/.config/zsh/env.zsh
-
 source ~/.config/zsh/functions.zsh
 
+# ── External tools ────────────────────────────
 source ~/.config/zsh/tools.zsh
+
+# Initialize completion only after plugin and tool completion paths are set.
+source ~/.config/zsh/completion.zsh
+
 fastfetch
