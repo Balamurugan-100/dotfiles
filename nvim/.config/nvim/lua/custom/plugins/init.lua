@@ -16,6 +16,7 @@ end
 vim.pack.add({
   -- Colorscheme
   gh("folke/tokyonight.nvim"),
+  gh("catppuccin/nvim" ),
   gh("folke/todo-comments.nvim"),
   gh("nvim-lua/plenary.nvim"), -- todo-comments dependency
 

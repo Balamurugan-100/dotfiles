@@ -16,8 +16,7 @@ require("blink.cmp").setup({
     },
 
     ["<C-n>"] = {
-      "select_next",
-      "fallback",
+      "select_next", "fallback",
     },
 
     ["<C-p>"] = {
@@ -43,7 +42,7 @@ require("blink.cmp").setup({
 
   completion = {
     documentation = {
-      auto_show = false,
+      auto_show = true,
     },
   },
 

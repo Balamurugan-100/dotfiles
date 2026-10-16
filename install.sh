@@ -14,25 +14,23 @@ info() { echo -e "${GREEN}[INFO]${NC} $1"; }
 warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 error() { echo -e "${RED}[ERROR]${NC} $1"; exit 1; }
 
-# ─── 1. Homebrew ──────────────────────────────────────────────────────────────
-if ! command -v brew &>/dev/null; then
-    info "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+# ─── 1. mise ─────────────────────────────────────────────────────────────────
+if [[ ! -x "$HOME/.local/bin/mise" ]] && ! command -v mise &>/dev/null; then
+    info "Installing mise..."
+    curl -fsSL https://mise.run | sh
 else
-    info "Homebrew already installed"
+    info "mise already installed"
 fi
 
-# ─── 2. Brew Packages ────────────────────────────────────────────────────────
-info "Installing brew packages from Brewfile..."
-brew bundle --file="$DOTFILES_DIR/Brewfile"
+export PATH="$HOME/.local/bin:$PATH"
+info "mise $(mise --version)"
 
-# ─── 3. GNU Stow ─────────────────────────────────────────────────────────────
+# ─── 2. GNU Stow ─────────────────────────────────────────────────────────────
 if ! command -v stow &>/dev/null; then
-    error "stow not found. Install with: brew install stow"
+    error "stow not found. Install it before running this script."
 fi
 
-# ─── 4. Remove conflicting existing files ────────────────────────────────────
+# ─── 3. Remove conflicting existing files ────────────────────────────────────
 info "Removing conflicting existing configs..."
 
 remove_if_not_symlink() {
@@ -58,7 +56,7 @@ remove_if_not_symlink "$HOME/.taskrc"
 remove_if_not_symlink "$HOME/.profile"
 
 # .config directory symlinks
-for dir in fish nvim kitty tmux tmuxp starship ghostty lazygit mise btop aerospace shell broot cava zed atuin doom; do
+for dir in nvim kitty tmux tmuxp starship ghostty lazygit mise btop aerospace shell broot cava zed atuin doom oh-my-posh; do
     remove_if_not_symlink "$HOME/.config/$dir"
 done
 
@@ -67,23 +65,18 @@ remove_if_not_symlink "$HOME/.config/init.lua"
 remove_if_not_symlink "$HOME/.config/lua"
 remove_if_not_symlink "$HOME/.config/lazy-lock.json"
 
-# ─── 5. Stow Packages ────────────────────────────────────────────────────────
+# ─── 4. Stow Packages ────────────────────────────────────────────────────────
 info "Stowing packages..."
 
-# Packages that go to ~/.config/
-config_packages=(
-    fish nvim kitty tmux tmuxp starship ghostty
-    lazygit mise btop aerospace shell broot cava zed
-    atuin doom
-)
-
-# Packages that go to ~/ (home directory)
-home_packages=(
+# All packages are laid out as .config/<name> (or dotfiles at the root),
+# so they all stow into $HOME.
+packages=(
+    nvim kitty tmux tmuxp starship ghostty lazygit mise btop
+    aerospace shell broot cava zed atuin doom oh-my-posh
     bash zsh git task profile
 )
 
-# Stow home directory packages
-for pkg in "${home_packages[@]}"; do
+for pkg in "${packages[@]}"; do
     if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
         info "Stowing $pkg → ~/..."
         stow -v -d "$DOTFILES_DIR" -t "$HOME" --restow "$pkg" 2>&1 | tail -1
@@ -92,25 +85,14 @@ for pkg in "${home_packages[@]}"; do
     fi
 done
 
-# Stow .config/ packages
-for pkg in "${config_packages[@]}"; do
-    if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
-        info "Stowing $pkg → ~/.config/..."
-        stow -v -d "$DOTFILES_DIR" -t "$HOME/.config" --restow "$pkg" 2>&1 | tail -1
-    else
-        warn "Package $pkg not found, skipping"
-    fi
-done
+# ─── 5. Install mise tools ───────────────────────────────────────────────────
+info "Installing mise tools from config..."
+mise install
+
+# Make mise-managed tools available to the rest of this script
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # ─── 6. Create secrets files if they don't exist ─────────────────────────────
-SECRETS_FILE="$HOME/.config/fish/secrets.fish"
-if [[ ! -f "$SECRETS_FILE" ]]; then
-    info "Creating secrets.fish from template..."
-    cp "$DOTFILES_DIR/fish/.config/fish/secrets.fish.template" "$SECRETS_FILE"
-    chmod 600 "$SECRETS_FILE"
-    warn "Please edit $SECRETS_FILE with your actual API keys and tokens"
-fi
-
 BASH_SECRETS_FILE="$HOME/.config/bash/secrets.sh"
 if [[ ! -f "$BASH_SECRETS_FILE" ]]; then
     info "Creating bash secrets.sh from template..."
@@ -122,56 +104,32 @@ fi
 
 # ─── 7. TPM (Tmux Plugin Manager) ────────────────────────────────────────────
 TPM_DIR="$HOME/.tmux/plugins/tpm"
-if [[ ! -d "$TPM_DIR" ]]; then
-    info "Installing TPM..."
-    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
-    info "Installing tmux plugins..."
-    "$TPM_DIR/bin/install_plugins"
-else
-    info "TPM already installed"
-fi
-
-# ─── 8. Fisher (Fish Plugin Manager) ─────────────────────────────────────────
-if command -v fish &>/dev/null; then
-    if ! fish -c "type -q fisher" 2>/dev/null; then
-        info "Installing Fisher..."
-        fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-        info "Installing fish plugins..."
-        fish -c "fisher install"
+if command -v tmux &>/dev/null; then
+    if [[ ! -d "$TPM_DIR" ]]; then
+        info "Installing TPM..."
+        git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+        info "Installing tmux plugins..."
+        "$TPM_DIR/bin/install_plugins"
     else
-        info "Fisher already installed"
+        info "TPM already installed"
     fi
 fi
 
-# ─── 9. Neovim Plugins ──────────────────────────────────────────────────────
+# ─── 8. Neovim Plugins ──────────────────────────────────────────────────────
 if command -v nvim &>/dev/null; then
     info "Syncing neovim plugins (headless)..."
     nvim --headless "+Lazy! sync" +qa 2>/dev/null || warn "Neovim plugin sync skipped"
 fi
 
-# ─── 10. Set Fish as Default Shell ────────────────────────────────────────────
-FISH_PATH="$(which fish)"
-if [[ "$SHELL" != "$FISH_PATH" ]]; then
-    info "Setting fish as default shell..."
-    if ! grep -q "$FISH_PATH" /etc/shells; then
-        echo "$FISH_PATH" | sudo tee -a /etc/shells >/dev/null
-    fi
-    chsh -s "$FISH_PATH"
-    info "Default shell changed to fish. Restart your terminal."
-else
-    info "Fish is already the default shell"
-fi
-
-# ─── 11. Post-install ────────────────────────────────────────────────────────
+# ─── 9. Post-install ────────────────────────────────────────────────────────
 echo ""
 info "✅ Dotfiles setup complete!"
 echo ""
-echo "  Packages stowed: ${#config_packages[@]} config + ${#home_packages[@]} home"
-echo "  Secrets files:   $SECRETS_FILE"
-echo "                   $BASH_SECRETS_FILE"
+echo "  Packages stowed: ${#packages[@]}"
+echo "  Secrets file:    $BASH_SECRETS_FILE"
 echo ""
 echo "  Next steps:"
-echo "    1. Edit secrets.fish with your API keys"
+echo "    1. Edit the secrets file with your API keys"
 echo "    2. Restart your terminal"
 echo "    3. Run 'tmux source ~/.config/tmux/tmux.conf' to reload tmux"
 echo ""

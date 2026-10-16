@@ -2,8 +2,7 @@ config-version = 2
 start-at-login = true
 
 after-startup-command = [
-    'exec-and-forget open -a Kitty',
-    'exec-and-forget open -a "Firefox Developer Edition"',
+    # 'exec-and-forget open -a Kitty',
 ]
 
 [mode.main.binding]
@@ -64,7 +63,6 @@ alt-shift-f = 'macos-native-fullscreen'
 
 alt-t = 'layout floating tiling'
 
-alt-enter = 'exec-and-forget open -n /Applications/Kitty.app'
 
 alt-shift-q = 'close'
 alt-shift-r = 'reload-config'
@@ -75,11 +73,11 @@ if.app-id = 'net.kovidgoyal.kitty'
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
-if.app-id = 'org.mozilla.firefoxdeveloperedition'
+if.app-id = 'com.vivaldi.Vivaldi'
 run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
-if.app-id = 'dev.zed.Zed'
+if.app-id = 'com.openai.codex'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
@@ -91,14 +89,6 @@ if.app-id = 'dev.kdrag0n.MacVirt'
 run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
-if.app-id = 'com.vivaldi.Vivaldi'
-run = 'move-node-to-workspace P'
-
-[[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = 'move-node-to-workspace S'
 
-
-[[on-window-detected]]
-if.app-id = 'dev.openpets.app'
-run = 'layout floating'

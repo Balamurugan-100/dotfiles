@@ -8,6 +8,7 @@ fi
 source "$ZINIT_HOME/zinit.zsh"
 
 
+source ~/.config/zsh/path.zsh
 source ~/.config/zsh/keybind.zsh
 source ~/.config/zsh/completion.zsh
 source ~/.config/zsh/alias.zsh
@@ -15,7 +16,6 @@ source ~/.config/zsh/history.zsh
 source ~/.config/zsh/plugins.zsh
 source ~/.config/zsh/snippets.zsh
 source ~/.config/zsh/env.zsh
-source ~/.config/zsh/path.zsh
 
 source ~/.config/zsh/functions.zsh
 
