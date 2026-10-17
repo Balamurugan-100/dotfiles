@@ -30,5 +30,6 @@ path=(
   # OrbStack
   "$HOME/.orbstack/bin"
 
+"$HOME/go/bin"
   $path
 )
