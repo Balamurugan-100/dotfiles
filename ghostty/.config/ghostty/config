@@ -1,8 +1,19 @@
 # Ghostty Configuration
-font-family = FiraCode Nerd Font
-font-size = 15
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 18
 background-opacity = 0.95
 window-padding-x = 4
 window-padding-y = 4
 shell-integration = zsh
 theme = Catppuccin Mocha
+window-decoration = none
+confirm-close-surface = false
+shell-integration = zsh
+
+
+keybind = clear
+
+keybind = cmd+shift+comma=reload_config
+
+keybind = cmd+c=copy_to_clipboard
+keybind = cmd+v=paste_from_clipboard
