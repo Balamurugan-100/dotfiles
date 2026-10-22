@@ -45,7 +45,10 @@ require("snacks").setup({
       header = header,
       pick = function(cmd, opts)
         local map = { files = "find_files", live_grep = "live_grep", oldfiles = "oldfiles" }
-        local picker = require("telescope.builtin")[map[cmd] or cmd]
+        local name = map[cmd] or cmd
+        -- go through custom.plugins.telescope's wrappers so the hidden/ignored
+        -- defaults (and <C-h>/<C-g> toggles) apply here too
+        local picker = require("custom.plugins.telescope")[name] or require("telescope.builtin")[name]
         if picker then
           picker(opts)
         end
@@ -74,10 +77,26 @@ require("snacks").setup({
     },
     sources = {
       explorer = {
+        -- always list dotfiles and gitignored files
+        hidden = true,
+        ignored = true,
         -- \ closes the explorer (same as the old neo-tree mapping)
+        -- <C-h>/<C-g> toggle hidden / gitignored files (same keys as telescope)
         win = {
-          input = { keys = { ["\\"] = "close" } },
-          list = { keys = { ["\\"] = "close" } },
+          input = {
+            keys = {
+              ["\\"] = "close",
+              ["<c-h>"] = { "toggle_hidden", mode = { "n", "i" } },
+              ["<c-g>"] = { "toggle_ignored", mode = { "n", "i" } },
+            },
+          },
+          list = {
+            keys = {
+              ["\\"] = "close",
+              ["<c-h>"] = { "toggle_hidden", mode = { "n", "i" } },
+              ["<c-g>"] = { "toggle_ignored", mode = { "n", "i" } },
+            },
+          },
         },
       },
     },
@@ -145,6 +164,12 @@ end
 vim.keymap.set("n", "<leader>E", function()
   Snacks.explorer({ cwd = explorer_file_dir() })
 end, { desc = "File Explorer (file dir)", silent = true })
+
+-- Open the explorer at Neovim's current working directory, regardless of
+-- where the current file lives
+vim.keymap.set("n", "<leader>ec", function()
+  Snacks.explorer({ cwd = vim.fn.getcwd() })
+end, { desc = "File Explorer (cwd)", silent = true })
 
 --------------------------------------------------------------------------------
 -- Terminal

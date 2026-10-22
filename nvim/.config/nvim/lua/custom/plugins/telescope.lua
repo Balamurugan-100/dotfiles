@@ -4,12 +4,52 @@
 
 local trouble_telescope = require("trouble.sources.telescope")
 
+-- File pickers list dotfiles and gitignored files by default.
+-- <C-h> toggles hidden files, <C-g> toggles gitignored files inside a picker.
+local file_flags = { hidden = true, ignored = true }
+
+-- ripgrep/fd argument that opts into gitignored files
+local function no_ignore_args()
+  return file_flags.ignored and { "--no-ignore" } or {}
+end
+
+-- Rebuilds the running picker after a flag toggle. Set by the wrapped
+-- pickers below; for pickers opened directly from telescope.builtin the
+-- flags just apply to the next picker that is opened.
+local reopen
+
+local function toggle_flag(flag, desc)
+  return function(prompt_bufnr)
+    file_flags[flag] = not file_flags[flag]
+    local rebuild = reopen
+    if rebuild then
+      require("telescope.actions").close(prompt_bufnr)
+      rebuild()
+    end
+    vim.notify(("%s: %s"):format(desc, file_flags[flag] and "shown" or "hidden"))
+  end
+end
+
 require("telescope").setup({
   defaults = {
+    -- baseline for every picker, kept in sync with `file_flags` by the
+    -- wrapped pickers below
+    hidden = true,
+    no_ignore = true,
+    additional_args = no_ignore_args,
     -- <C-t> inside any picker sends the results to trouble.nvim
+    -- <C-h>/<C-g> toggle hidden / gitignored files
     mappings = {
-      i = { ["<C-t>"] = trouble_telescope.open },
-      n = { ["<C-t>"] = trouble_telescope.open },
+      i = {
+        ["<C-t>"] = trouble_telescope.open,
+        ["<C-h>"] = toggle_flag("hidden", "Hidden files"),
+        ["<C-g>"] = toggle_flag("ignored", "Gitignored files"),
+      },
+      n = {
+        ["<C-t>"] = trouble_telescope.open,
+        ["<C-h>"] = toggle_flag("hidden", "Hidden files"),
+        ["<C-g>"] = toggle_flag("ignored", "Gitignored files"),
+      },
     },
   },
   extensions = {
@@ -22,18 +62,50 @@ pcall(require("telescope").load_extension, "ui-select")
 
 local builtin = require("telescope.builtin")
 
+-- Wrapped pickers honor the current hidden/ignored flags and remember how
+-- to reopen themselves so <C-h>/<C-g> can rebuild the running picker.
+local function wrap(picker)
+  return function(opts)
+    reopen = function()
+      picker(opts)
+    end
+    picker(opts)
+  end
+end
+
+local find_files = wrap(function(opts)
+  builtin.find_files(vim.tbl_extend("force", {
+    hidden = file_flags.hidden,
+    no_ignore = file_flags.ignored,
+  }, opts or {}))
+end)
+
+local live_grep = wrap(function(opts)
+  builtin.live_grep(vim.tbl_extend("force", {
+    hidden = file_flags.hidden,
+    additional_args = no_ignore_args,
+  }, opts or {}))
+end)
+
+local grep_string = wrap(function(opts)
+  builtin.grep_string(vim.tbl_extend("force", {
+    hidden = file_flags.hidden,
+    additional_args = no_ignore_args,
+  }, opts or {}))
+end)
+
 -- Search
 vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 
 vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 
-vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+vim.keymap.set("n", "<leader>sf", find_files, { desc = "[S]earch [F]iles" })
 
 vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Picker" })
 
-vim.keymap.set({ "n", "v" }, "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+vim.keymap.set({ "n", "v" }, "<leader>sw", grep_string, { desc = "[S]earch current [W]ord" })
 
-vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+vim.keymap.set("n", "<leader>sg", live_grep, { desc = "[S]earch by [G]rep" })
 
 vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 
@@ -55,7 +127,7 @@ end, { desc = "Search Current Buffer" })
 
 -- Grep open files
 vim.keymap.set("n", "<leader>s/", function()
-  builtin.live_grep({
+  live_grep({
     grep_open_files = true,
     prompt_title = "Live Grep in Open Files",
   })
@@ -118,3 +190,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("gW", builtin.lsp_dynamic_workspace_symbols, "Workspace Symbols")
   end,
 })
+
+-- Exported so other configs (e.g. the snacks dashboard) open pickers through
+-- the same hidden/ignored-aware wrappers
+return {
+  find_files = find_files,
+  live_grep = live_grep,
+  grep_string = grep_string,
+}

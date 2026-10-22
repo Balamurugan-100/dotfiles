@@ -128,15 +128,6 @@ template = "{{ if ne .Code 0 }}✘ {{ .Code }} {{ end }}"
 [blocks.segments.options]
 always_enabled = true
 
-# Clock
-[[blocks.segments]]
-type = "time"
-style = "plain"
-foreground = "#64748B"
-template = "󰥔 {{ .CurrentDate | date .Format }} "
-
-[blocks.segments.options]
-time_format = "15:04"
 
 # ── COMMAND LINE ──────────────────────────────────────────
 

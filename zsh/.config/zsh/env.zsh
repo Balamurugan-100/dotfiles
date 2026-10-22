@@ -21,3 +21,4 @@ export DATABASE_USER_PASSWORD='testpress1$'
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
+export DYLD_LIBRARY_PATH="/opt/homebrew/lib:${DYLD_LIBRARY_PATH:-}"

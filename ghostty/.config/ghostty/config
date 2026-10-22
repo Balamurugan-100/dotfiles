@@ -17,3 +17,30 @@ keybind = cmd+shift+comma=reload_config
 
 keybind = cmd+c=copy_to_clipboard
 keybind = cmd+v=paste_from_clipboard
+
+
+
+# Vim-style cursor movement
+keybind = alt+h=text:\x1b[D
+keybind = alt+j=text:\x1b[B
+keybind = alt+k=text:\x1b[A
+keybind = alt+l=text:\x1b[C
+
+# Option + Arrow — move by word
+keybind = alt+left=text:\x1bb
+keybind = alt+right=text:\x1bf
+
+# Cmd + Arrow — beginning/end of line
+keybind = cmd+left=text:\x01
+keybind = cmd+right=text:\x05
+
+# Cmd + Up/Down — beginning/end of input/history
+keybind = cmd+up=text:\x01
+keybind = cmd+down=text:\x05
+
+keybind = cmd+q=quit
+
+
+keybind = cmd+equal=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+0=reset_font_size
