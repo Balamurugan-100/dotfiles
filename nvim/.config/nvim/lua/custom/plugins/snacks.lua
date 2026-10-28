@@ -78,8 +78,8 @@ require("snacks").setup({
     sources = {
       explorer = {
         -- always list dotfiles and gitignored files
-        hidden = true,
-        ignored = true,
+        hidden = false,
+        ignored = false,
         -- \ closes the explorer (same as the old neo-tree mapping)
         -- <C-h>/<C-g> toggle hidden / gitignored files (same keys as telescope)
         win = {
