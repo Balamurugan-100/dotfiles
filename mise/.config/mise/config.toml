@@ -9,7 +9,6 @@ node = "22"
 pnpm = "latest"
 python = "3.13"
 ripgrep = "latest"
-ruby = "latest"
 rust = "stable"
 uv = "latest"
 yazi = "latest"
@@ -17,7 +16,6 @@ neovim = "latest"
 tmux = "latest"
 oh-my-posh = "latest"
 "go:github.com/nolight132/nls/cmd/nls" = "latest"
-agy = "latest"
 
 
 [settings]
