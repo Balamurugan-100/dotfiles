@@ -7,7 +7,7 @@ go = "latest"
 jq = "latest"
 node = "22"
 pnpm = "latest"
-python = "3.13"
+python = "3.11"
 ripgrep = "latest"
 rust = "stable"
 uv = "latest"
@@ -19,6 +19,7 @@ oh-my-posh = "latest"
 zoxide = "latest"
 atuin = "latest"
 fastfetch = "latest"
+"pipx:thefuck" = "latest"
 
 
 [settings]
