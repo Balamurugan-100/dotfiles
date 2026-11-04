@@ -71,7 +71,9 @@ local servers = {
 --------------------------------------------------------------------------------
 
 require("mason-tool-installer").setup({
-  ensure_installed = vim.tbl_keys(servers),
+ensure_installed = vim.tbl_filter(function(server)
+  return server ~= 'clangd'
+end, vim.tbl_keys(servers)),
 })
 
 --------------------------------------------------------------------------------
