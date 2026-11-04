@@ -25,6 +25,61 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 info "mise $(mise --version)"
 
+
+# ─── 2. Neovim ───────────────────────────────────────────────────────────────
+NVIM_VERSION="0.12.0"
+
+install_neovim() {
+    if command -v nvim &>/dev/null; then
+        local installed_version
+        installed_version="$(nvim --version | head -n 1)"
+
+        if [[ "$installed_version" == "NVIM v${NVIM_VERSION}"* ]]; then
+            info "Neovim ${NVIM_VERSION} already installed"
+            return
+        fi
+    fi
+
+    info "Installing Neovim ${NVIM_VERSION}..."
+
+    local arch
+    case "$(uname -m)" in
+        x86_64)  arch="x86_64" ;;
+        aarch64|arm64) arch="arm64" ;;
+        *) error "Unsupported architecture: $(uname -m)" ;;
+    esac
+
+    local os
+    os="$(uname -s)"
+
+    if [[ "$os" != "Linux" ]]; then
+        warn "Skipping Neovim installation on ${os}"
+        return
+    fi
+
+    local archive="nvim-linux-${arch}.tar.gz"
+    local url="https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/${archive}"
+    local tmp_dir
+    tmp_dir="$(mktemp -d)"
+
+    curl -fL "$url" -o "${tmp_dir}/${archive}" || {
+        rm -rf "$tmp_dir"
+        error "Failed to download Neovim"
+    }
+
+    sudo mkdir -p /opt
+    sudo tar -xzf "${tmp_dir}/${archive}" -C /opt
+    sudo ln -sfn "/opt/nvim-linux-${arch}/bin/nvim" /usr/local/bin/nvim
+
+    rm -rf "$tmp_dir"
+
+    info "Neovim installed successfully"
+    /usr/local/bin/nvim --version | head -n 1
+}
+
+install_neovim
+
+
 # ─── 2. GNU Stow ─────────────────────────────────────────────────────────────
 if ! command -v stow &>/dev/null; then
     error "stow not found. Install it before running this script."
