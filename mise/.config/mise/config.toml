@@ -12,7 +12,6 @@ ripgrep = "latest"
 rust = "stable"
 uv = "latest"
 yazi = "latest"
-neovim = "latest"
 tmux = "latest"
 oh-my-posh = "latest"
 "go:github.com/nolight132/nls/cmd/nls" = "latest"
@@ -20,6 +19,7 @@ zoxide = "latest"
 atuin = "latest"
 fastfetch = "latest"
 "pipx:thefuck" = "latest"
+delta = "latest"
 
 
 [settings]
