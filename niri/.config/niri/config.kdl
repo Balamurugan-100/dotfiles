@@ -88,7 +88,13 @@ window-rule {
 
 // Floating dialogs & utilities
 window-rule {
-    match app-id=r#"^(pavucontrol|nm-connection-editor|blueman-manager)$"#
+    match app-id=r#"^(pavucontrol|nm-connection-editor|blueman-manager|org\.gnome\.NautilusPreviewer)$"#
+    open-floating true
+}
+
+// Browser Picture-in-Picture
+window-rule {
+    match title=r#"^Picture-in-Picture$"#
     open-floating true
 }
 
@@ -104,6 +110,10 @@ binds {
     Mod+V      { spawn "vicinae" "cmd" "launch" "clipboard:history"; }
     Mod+Period { spawn "vicinae" "cmd" "launch" "core:search-emojis"; }
     Mod+Shift+B { spawn "wayle" "panel" "toggle"; }
+    Mod+Z      { spawn "zed"; }
+    Mod+C      { spawn "kitty" "-e" "nvim"; }
+    Mod+E      { spawn "nautilus"; }
+    Mod+Ctrl+N { spawn "/home/kaizen/.config/hypr/scripts/toggle_nightlight.sh"; }
 
     // Window Management
     Mod+Q       { close-window; }
