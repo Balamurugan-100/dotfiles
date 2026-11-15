@@ -170,9 +170,7 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor_cli))
 hl.bind(mainMod .. " + CTRL + N", hl.dsp.exec_cmd(nightlight))
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(home .. "/.local/bin/wayle-settings"))
 
--- Topbar Menubar Toggle (Mac-style show/hide)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(wayle_toggle))
-hl.bind(mainMod .. " + ALT + B", hl.dsp.exec_cmd(wayle_toggle))
+-- Topbar Menubar Toggle (Super + Shift + B)
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(wayle_toggle))
 
 -- Window Management

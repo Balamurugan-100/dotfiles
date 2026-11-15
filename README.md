@@ -47,7 +47,7 @@ Both **Hyprland** (Linux) and **AeroSpace** (macOS) share identical ergonomics:
 | **Close Window** | <kbd>Super</kbd> + <kbd>Q</kbd> | <kbd>Alt</kbd> + <kbd>Q</kbd> |
 | **Toggle Fullscreen** | <kbd>Super</kbd> + <kbd>F</kbd> | <kbd>Alt</kbd> + <kbd>F</kbd> |
 | **Toggle Float / Tile** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd> |
-| **Toggle Topbar (Wayle)** | <kbd>Super</kbd> + <kbd>M</kbd> or <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>B</kbd> | N/A (macOS native menubar) |
+| **Toggle Topbar (Wayle)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd> | N/A (macOS native menubar) |
 | **Reload Config** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> |
 
 ---
