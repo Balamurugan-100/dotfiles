@@ -110,16 +110,10 @@ hl.animation({ leaf = "border",     enabled = true,  speed = 10.0, bezier = "def
 hl.animation({ leaf = "fade",       enabled = true,  speed = 3.0, bezier = "md3_decel" })
 hl.animation({ leaf = "workspaces", enabled = true,  speed = 5.0, bezier = "menu_decel", style = "slide" })
 
--- ── Native Autostart ───────────────────────────────────────────────
-hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PATH")
-hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PATH")
-hl.exec_cmd("hyprpaper")
-hl.exec_cmd("wayle shell")
-hl.exec_cmd("hypridle")
-hl.exec_cmd("systemctl --user start vicinae.service || vicinae server")
-hl.exec_cmd("/usr/libexec/hyprpolkitagent || /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
-hl.exec_cmd("wl-paste --type text --watch cliphist store")
-hl.exec_cmd("wl-paste --type image --watch cliphist store")
+-- ── Native Hyprland Autostart ────────────────────────────────────────
+hl.on("hyprland.start", function()
+    hl.exec_cmd(home .. "/.config/hypr/scripts/autostart.sh")
+end)
 
 -- ── Applications & Native Vicinae Tools ─────────────────────────────
 local mainMod = "SUPER"
@@ -130,33 +124,31 @@ local filemanager  = "nautilus"
 local filemgr_cli  = "kitty -e yazi"
 local editor_gui   = "zed"
 local editor_cli   = "kitty -e nvim"
+local ai_agent     = "kitty -e opencode"
 
 local launcher     = "vicinae toggle"
 local clipboard    = "vicinae cmd launch clipboard:history"
 local emoji_picker = "vicinae cmd launch core:search-emojis"
 local file_search  = "vicinae cmd launch files:search"
+local win_switcher = "vicinae cmd launch wm:switch-windows"
 local nightlight   = home .. "/.config/hypr/scripts/toggle_nightlight.sh"
 local wayle_toggle = home .. "/.local/bin/wayle panel toggle"
 
 -- Applications Binds
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(clipboard))
 hl.bind(mainMod .. " + Period", hl.dsp.exec_cmd(emoji_picker))
-hl.bind("ALT + Tab", function()
-    hl.dispatch(hl.dsp.window.cycle_next())
-    hl.dispatch(hl.dsp.window.bring_active_to_top())
-end)
-hl.bind("ALT + SHIFT + Tab", function()
-    hl.dispatch(hl.dsp.window.cycle_next({ prev = true }))
-    hl.dispatch(hl.dsp.window.bring_active_to_top())
-end)
+hl.bind("ALT + Tab", hl.dsp.exec_cmd(win_switcher))
+hl.bind("ALT + SHIFT + Tab", hl.dsp.exec_cmd(win_switcher))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd(file_search))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(filemanager))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(filemgr_cli))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(editor_gui))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor_cli))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd(ai_agent))
 hl.bind(mainMod .. " + CTRL + N", hl.dsp.exec_cmd(nightlight))
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(home .. "/.local/bin/wayle-settings"))
 
