@@ -14,5 +14,8 @@
       "dark": {
          "name": "catppuccin-mocha"
       }
+   },
+   "tray": {
+      "enabled": false
    }
 }

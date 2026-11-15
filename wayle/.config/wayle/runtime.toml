@@ -1,2 +1,23 @@
+[[bar.layout]]
+monitor = "*"
+show = true
+left = [
+    "hyprland-workspaces",
+    "window-title",
+]
+center = ["clock"]
+right = [
+    "systray",
+    "media",
+    "hyprsunset",
+    "volume",
+    "brightness",
+    "network",
+    "bluetooth",
+    "battery",
+    "notifications",
+    "dashboard",
+]
+
 [modules.bluetooth]
 label-max-length = 12

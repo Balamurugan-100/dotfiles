@@ -9,7 +9,7 @@ font-mono = "JetBrainsMono Nerd Font Mono"
 tearing-mode = false
 
 [bar]
-scale = 0.85
+scale = 1.0
 inset-edge = 0.0
 inset-ends = 0.0
 padding = 0.2
@@ -29,9 +29,9 @@ shadow = "none"
 button-variant = "basic"
 button-opacity = 100
 button-bg-opacity = 100
-button-icon-size = 0.85
+button-icon-size = 1.0
 button-icon-padding = 0.4
-button-label-size = 0.85
+button-label-size = 1.05
 button-label-weight = "medium"
 button-label-padding = 0.4
 button-rounding = "sm"
@@ -60,16 +60,18 @@ show = true
 left = ["hyprland-workspaces", "window-title"]
 center = ["clock"]
 right = [
+    "systray",
     "volume",
     "brightness",
     "network",
     "bluetooth",
     "battery",
+    "notifications",
     "dashboard",
 ]
 
 [styling]
-scale = 0.85
+scale = 1.0
 rounding = "sm"
 theme-provider = "wayle"
 theming-monitor = ""
@@ -87,6 +89,9 @@ green = "#a6e3a1"
 blue = "#89b4fa"
 
 # ── Modules ───────────────────────────────────────────────────────
+[modules.systray]
+blacklist = ["*vicinae*", "*Vicinae*"]
+
 [modules.hyprland-workspaces]
 min-workspace-count = 5
 monitor-specific = false
@@ -104,7 +109,7 @@ app-icons-show = true
 app-icons-dedupe = true
 divider = " "
 icon-gap = 0.3
-icon-size = 0.85
+icon-size = 1.0
 
 [modules.window-title]
 show-icon = true
