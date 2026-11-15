@@ -111,9 +111,19 @@ hl.animation({ leaf = "fade",       enabled = true,  speed = 3.0, bezier = "md3_
 hl.animation({ leaf = "workspaces", enabled = true,  speed = 5.0, bezier = "menu_decel", style = "slide" })
 
 -- ── Native Hyprland Autostart ────────────────────────────────────────
-hl.on("hyprland.start", function()
+-- Run autostart.sh once per Hyprland instance (equivalent to exec-once).
+-- Note: hl.on("hyprland.start", ...) is NOT emitted by Hyprland 0.57.x,
+-- so we launch directly with an instance guard.
+local sig = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
+local runtime = os.getenv("XDG_RUNTIME_DIR") or ("/run/user/" .. (os.getenv("UID") or "1000"))
+local autostart_lock = runtime .. "/hypr/" .. (sig or "default") .. "/.autostart_completed"
+
+local lock_fd = io.open(autostart_lock, "r")
+if not lock_fd then
     hl.exec_cmd(home .. "/.config/hypr/scripts/autostart.sh")
-end)
+else
+    lock_fd:close()
+end
 
 -- ── Applications & Native Vicinae Tools ─────────────────────────────
 local mainMod = "SUPER"

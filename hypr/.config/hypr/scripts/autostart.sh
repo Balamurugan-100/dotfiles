@@ -4,6 +4,16 @@ set -euo pipefail
 
 export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:/usr/local/bin:$PATH"
 
+# Prevent running multiple times within the same Hyprland instance (e.g. on reload)
+INSTANCE_SIGNATURE="${HYPRLAND_INSTANCE_SIGNATURE:-default}"
+LOCK_FILE="${XDG_RUNTIME_DIR:-/run/user/$UID}/hypr/${INSTANCE_SIGNATURE}/.autostart_completed"
+
+if [[ -f "$LOCK_FILE" ]]; then
+    exit 0
+fi
+mkdir -p "$(dirname "$LOCK_FILE")"
+touch "$LOCK_FILE"
+
 # 0. Wait for the Hyprland IPC socket to accept connections
 # (hyprpaper aborts at startup if it can't reach the compositor socket yet)
 for _ in $(seq 1 50); do
@@ -12,8 +22,10 @@ for _ in $(seq 1 50); do
 done
 
 # 1. Import session environment
-dbus-update-activation-environment \
-    --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE PATH
+dbus-update-activation-environment --systemd \
+    WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE PATH 2>/dev/null || true
+systemctl --user import-environment \
+    WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE PATH 2>/dev/null || true
 
 # 2. Desktop portals (non-blocking)
 systemctl --user start --no-block \
@@ -21,32 +33,28 @@ systemctl --user start --no-block \
     xdg-desktop-portal.service \
     2>/dev/null || true
 
-# 2b. Kill stale daemons left over from a previous Hyprland session.
-# Without this, the pgrep guards below can match an orphan from the old
-# session and skip starting a fresh instance for THIS session (no
-# wallpaper, no topbar, no idle daemon). SIGTERM first, then SIGKILL any
-# stragglers (unloading a large wallpaper can be slow) so a dying process
-# can never satisfy the pgrep guards below.
+# 2b. Clean up any stale orphan daemons left over from a previous session.
 pkill -x hyprpaper 2>/dev/null || true
 pkill -x hypridle 2>/dev/null || true
 pkill -x hyprpolkitagent 2>/dev/null || true
 pkill -x wayle 2>/dev/null || true
 pkill -f 'wl-paste --type text --watch cliphist store' 2>/dev/null || true
 pkill -f 'wl-paste --type image --watch cliphist store' 2>/dev/null || true
-sleep 0.3
+sleep 0.2
 pkill -9 -x hyprpaper 2>/dev/null || true
 pkill -9 -x hypridle 2>/dev/null || true
 pkill -9 -x hyprpolkitagent 2>/dev/null || true
 pkill -9 -x wayle 2>/dev/null || true
 pkill -9 -f 'wl-paste --type text --watch cliphist store' 2>/dev/null || true
 pkill -9 -f 'wl-paste --type image --watch cliphist store' 2>/dev/null || true
-sleep 0.3
 
 # 3. Authentication agent
-if [[ -x /usr/libexec/hyprpolkitagent ]]; then
-    /usr/libexec/hyprpolkitagent &
-elif [[ -x /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 ]]; then
-    /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+if ! pgrep -x hyprpolkitagent >/dev/null; then
+    if [[ -x /usr/libexec/hyprpolkitagent ]]; then
+        /usr/libexec/hyprpolkitagent >/dev/null 2>&1 &
+    elif [[ -x /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 ]]; then
+        /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 >/dev/null 2>&1 &
+    fi
 fi
 
 # 4. Wallpaper
@@ -79,3 +87,5 @@ if ! systemctl --user start --no-block vicinae.service 2>/dev/null; then
         vicinae server >/dev/null 2>&1 &
     fi
 fi
+
+disown -a 2>/dev/null || true
