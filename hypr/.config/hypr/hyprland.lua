@@ -32,16 +32,6 @@ hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
--- NVIDIA & Hybrid GPU Optimizations
-hl.env("LIBVA_DRIVER_NAME", "nvidia")
-hl.env("GBM_BACKEND", "nvidia-drm")
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
-hl.env("NVD_BACKEND", "direct")
-
--- Cursor Settings
-hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_SIZE", "24")
-
 -- Default Editors
 hl.env("EDITOR", "nvim")
 hl.env("VISUAL", "zed")
@@ -57,7 +47,7 @@ hl.config({
             inactive_border = "rgba(313244aa)",
         },
         resize_on_border = true,
-        allow_tearing = false,
+        allow_tearing = true,
         layout = "dwindle",
     },
 
@@ -66,16 +56,10 @@ hl.config({
         active_opacity = 1.0,
         inactive_opacity = 0.96,
         shadow = {
-            enabled = true,
-            range = 15,
-            render_power = 3,
-            color = 0x6611111b,
+            enabled = false,
         },
         blur = {
-            enabled = true,
-            size = 6,
-            passes = 3,
-            vibrancy = 0.1696,
+            enabled = false,
         },
     },
 
@@ -103,27 +87,28 @@ hl.config({
     },
 
     misc = {
+        vrr = 1,
+        initial_workspace_tracking = 0,
         force_default_wallpaper = 0,
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
         mouse_move_enables_dpms = true,
         key_press_enables_dpms = true,
-        vrr = 1,
     },
 })
 
 -- ── Ultra-Fast & Snappy Animations ─────────────────────────────────
-hl.curve("snappy",         { type = "bezier", points = { {0.1, 1}, {0.1, 1} } })
-hl.curve("quick",          { type = "bezier", points = { {0.05, 0.9}, {0.1, 1.05} } })
-hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1}, {0.32, 1} } })
+hl.curve("md3_decel",  { type = "bezier", points = { {0.05, 0.7}, {0.1, 1.0} } })
+hl.curve("md3_accel",  { type = "bezier", points = { {0.3, 0.0}, {0.8, 0.15} } })
+hl.curve("menu_decel", { type = "bezier", points = { {0.1, 1.0}, {0.0, 1.0} } })
 
-hl.animation({ leaf = "global",     enabled = true,  speed = 1.4, bezier = "snappy" })
-hl.animation({ leaf = "windows",    enabled = true,  speed = 1.2, bezier = "snappy" })
-hl.animation({ leaf = "windowsIn",  enabled = true,  speed = 1.2, bezier = "quick",  style = "popin 95%" })
-hl.animation({ leaf = "windowsOut", enabled = true,  speed = 1.0, bezier = "snappy", style = "popin 95%" })
-hl.animation({ leaf = "border",     enabled = true,  speed = 1.2, bezier = "snappy" })
-hl.animation({ leaf = "fade",       enabled = true,  speed = 1.0, bezier = "snappy" })
-hl.animation({ leaf = "workspaces", enabled = true,  speed = 1.4, bezier = "snappy", style = "slide" })
+hl.animation({ leaf = "global",     enabled = true,  speed = 3.0, bezier = "md3_decel" })
+hl.animation({ leaf = "windows",    enabled = true,  speed = 3.0, bezier = "md3_decel", style = "popin 60%" })
+hl.animation({ leaf = "windowsIn",  enabled = true,  speed = 3.0, bezier = "md3_decel", style = "popin 60%" })
+hl.animation({ leaf = "windowsOut", enabled = true,  speed = 3.0, bezier = "md3_accel", style = "popin 60%" })
+hl.animation({ leaf = "border",     enabled = true,  speed = 10.0, bezier = "default" })
+hl.animation({ leaf = "fade",       enabled = true,  speed = 3.0, bezier = "md3_decel" })
+hl.animation({ leaf = "workspaces", enabled = true,  speed = 5.0, bezier = "menu_decel", style = "slide" })
 
 -- ── Autostart ──────────────────────────────────────────────────────
 hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/autostart.sh")

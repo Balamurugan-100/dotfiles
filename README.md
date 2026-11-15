@@ -101,15 +101,24 @@ firefox/
     └── userContent.css   # Catppuccin Mocha for internal pages
 ```
 
-### ⌨️ Vimium Keybindings (Ctrl+Shift+C to Copy URL)
+### ⌨️ Vimium Keybindings (Copy URL & Markdown)
 Both browsers support reproducible Vimium / Vimium C configurations stored in `vimium-options.json`:
-* <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> or <kbd>yy</kbd> $\rightarrow$ Copy Current URL
+* <kbd>y</kbd><kbd>m</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> $\rightarrow$ **Copy URL as Markdown** (`[Page Title](URL)`)
+* <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> or <kbd>y</kbd><kbd>y</kbd> $\rightarrow$ Copy Plain URL
 * <kbd>J</kbd> / <kbd>K</kbd> (or <kbd>gT</kbd> / <kbd>gt</kbd>) $\rightarrow$ Previous / Next Tab (tabs on right)
 * <kbd>x</kbd> / <kbd>X</kbd> $\rightarrow$ Close Tab / Restore Closed Tab
 * <kbd>t</kbd> $\rightarrow$ Create New Tab
 * <kbd>f</kbd> / <kbd>F</kbd> $\rightarrow$ Open Link Hint (Current / New Tab)
 * <kbd>j</kbd> / <kbd>k</kbd> / <kbd>d</kbd> / <kbd>u</kbd> $\rightarrow$ Smooth scrolling (Vim keys)
-*(To import: Open Vimium Options $\rightarrow$ Show Advanced Options $\rightarrow$ Restore from Backup / paste `vimium-options.json`)*.
+
+*(To import: Open Vimium C Options $\rightarrow$ Show Advanced Options $\rightarrow$ Restore from Backup / paste `vimium-options.json`)*.
+
+#### 📌 Native Bookmarklet Alternative (Zero Extensions)
+You can also create a bookmark in Firefox / Zen named `Copy Markdown` with keyword `md` and location:
+```javascript
+javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.href})`);void(0);
+```
+Pressing <kbd>Ctrl</kbd> + <kbd>L</kbd> $\rightarrow$ typing `md` $\rightarrow$ <kbd>Enter</kbd> copies `[Title](URL)` directly to clipboard!
 ```
 
 Run either script anytime to apply the configuration to any local profile (Linux Flatpak, native Linux, or macOS):
