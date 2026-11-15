@@ -100,10 +100,15 @@ occupied-color = "fg-default"
 empty-color = "fg-muted"
 container-bg-color = "bg-surface"
 border-show = true
+app-icons-show = true
+app-icons-dedupe = true
+divider = " "
+icon-gap = 0.3
+icon-size = 0.85
 
 [modules.window-title]
-show-icon = false
-max-length = 30
+show-icon = true
+max-length = 35
 
 [modules.clock]
 format = "%a %b %d  %H:%M"
