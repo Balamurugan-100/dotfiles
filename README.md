@@ -8,7 +8,7 @@ A modern, minimal, keyboard-driven dotfiles ecosystem unified under the **Catppu
 
 | Category | Ubuntu / Linux | macOS | Config Location |
 | :--- | :--- | :--- | :--- |
-| **Window Manager** | **Niri** (v26.04) / **Hyprland** (v0.57.2) | **AeroSpace** (v2, Tiling WM) | [`niri/`](file:///home/kaizen/dotfiles/niri/.config/niri/config.kdl), [`hypr/`](file:///home/kaizen/dotfiles/hypr/.config/hypr/hyprland.lua), [`aerospace/`](file:///home/kaizen/dotfiles/aerospace/.config/aerospace/aerospace.toml) |
+| **Window Manager** | **Hyprland** (v0.57.2, Lua engine) | **AeroSpace** (v2, Tiling WM) | [`hypr/`](file:///home/kaizen/dotfiles/hypr/.config/hypr/hyprland.lua), [`aerospace/`](file:///home/kaizen/dotfiles/aerospace/.config/aerospace/aerospace.toml) |
 | **Desktop Shell** | **Wayle** (v0.7.1, GTK4/Rust) | macOS native menubar | [`wayle/`](file:///home/kaizen/dotfiles/wayle/.config/wayle/config.toml) |
 | **Launcher & Clipboard** | **Vicinae** | **Raycast** | [`vicinae/`](file:///home/kaizen/dotfiles/vicinae/.config/vicinae/settings.json) |
 | **Terminal** | **Kitty** | **Kitty** | [`kitty/`](file:///home/kaizen/dotfiles/kitty/.config/kitty/theme.conf) |

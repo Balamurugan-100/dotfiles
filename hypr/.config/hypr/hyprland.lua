@@ -111,7 +111,7 @@ hl.animation({ leaf = "fade",       enabled = true,  speed = 3.0, bezier = "md3_
 hl.animation({ leaf = "workspaces", enabled = true,  speed = 5.0, bezier = "menu_decel", style = "slide" })
 
 -- ── Autostart ──────────────────────────────────────────────────────
-hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/autostart.sh")
+hl.exec_cmd(home .. "/.config/hypr/scripts/autostart.sh")
 
 -- ── Applications & Native Vicinae Tools ─────────────────────────────
 local mainMod = "SUPER"

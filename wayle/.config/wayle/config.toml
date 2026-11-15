@@ -57,7 +57,7 @@ dropdown-freeze-label = true
 [[bar.layout]]
 monitor = "*"
 show = true
-left = ["niri-workspaces", "hyprland-workspaces", "window-title"]
+left = ["hyprland-workspaces", "window-title"]
 center = ["clock"]
 right = [
     "volume",
@@ -87,17 +87,6 @@ green = "#a6e3a1"
 blue = "#89b4fa"
 
 # ── Modules ───────────────────────────────────────────────────────
-[modules.niri-workspaces]
-min-workspace-count = 5
-monitor-specific = false
-display-mode = "label"
-active-indicator = "background"
-active-color = "accent"
-occupied-color = "fg-default"
-empty-color = "fg-muted"
-container-bg-color = "bg-surface"
-border-show = true
-
 [modules.hyprland-workspaces]
 min-workspace-count = 5
 monitor-specific = false

@@ -13,7 +13,6 @@ rust = "stable"
 uv = "latest"
 yazi = "latest"
 tmux = "latest"
-neovim = "latest"
 btop = "latest"
 lazygit = "latest"
 oh-my-posh = "latest"
@@ -27,6 +26,8 @@ opencode = { version = "latest", allow_builds = ["@opencode/cli"] }
 
 
 [settings]
+not_found_auto_install = false
+status.missing_tools = "never"
 
 [settings.python]
 github_attestations = false
