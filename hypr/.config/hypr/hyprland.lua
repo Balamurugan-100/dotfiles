@@ -113,10 +113,10 @@ hl.animation({ leaf = "workspaces", enabled = true,  speed = 5.0, bezier = "menu
 -- ── Native Autostart ───────────────────────────────────────────────
 hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PATH")
 hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PATH")
-hl.exec_cmd("killall -9 hyprpaper wayle hypridle 2>/dev/null; hyprpaper")
+hl.exec_cmd("hyprpaper")
 hl.exec_cmd("wayle shell")
 hl.exec_cmd("hypridle")
-hl.exec_cmd("systemctl --user restart vicinae.service || vicinae server")
+hl.exec_cmd("systemctl --user start vicinae.service || vicinae server")
 hl.exec_cmd("/usr/libexec/hyprpolkitagent || /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 hl.exec_cmd("wl-paste --type text --watch cliphist store")
 hl.exec_cmd("wl-paste --type image --watch cliphist store")
