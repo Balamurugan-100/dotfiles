@@ -15,9 +15,11 @@ success() { echo -e "${GREEN}[OK]${NC} $*"; }
 warn() { echo -e "${YELLOW}[WARN]${NC} $*"; }
 
 candidate_roots=(
+    "$HOME/snap/firefox/common/.mozilla/firefox"
     "$HOME/.mozilla/firefox"
-    "$HOME/Library/Application Support/Firefox/Profiles"
     "$HOME/.var/app/org.mozilla.firefox/.mozilla/firefox"
+    "$HOME/Library/Application Support/Firefox/Profiles"
+    "$HOME/Library/Application Support/Mozilla/Firefox/Profiles"
 )
 
 found_profile=0
@@ -25,16 +27,16 @@ found_profile=0
 apply_to_profile() {
     local profile_dir="$1"
 
-    info "Applying Catppuccin Mocha profile to: ${profile_dir}"
+    info "Applying Catppuccin Mocha + Zen UI profile to: ${profile_dir}"
 
     mkdir -p "${profile_dir}/chrome"
 
-    # Link user.js
-    ln -sf "${SCRIPT_DIR}/user.js" "${profile_dir}/user.js"
+    # Link or copy user.js
+    ln -sf "${SCRIPT_DIR}/user.js" "${profile_dir}/user.js" 2>/dev/null || cp -f "${SCRIPT_DIR}/user.js" "${profile_dir}/user.js"
 
-    # Link chrome stylesheets
-    ln -sf "${SCRIPT_DIR}/chrome/userChrome.css" "${profile_dir}/chrome/userChrome.css"
-    ln -sf "${SCRIPT_DIR}/chrome/userContent.css" "${profile_dir}/chrome/userContent.css"
+    # Link or copy chrome stylesheets
+    ln -sf "${SCRIPT_DIR}/chrome/userChrome.css" "${profile_dir}/chrome/userChrome.css" 2>/dev/null || cp -f "${SCRIPT_DIR}/chrome/userChrome.css" "${profile_dir}/chrome/userChrome.css"
+    ln -sf "${SCRIPT_DIR}/chrome/userContent.css" "${profile_dir}/chrome/userContent.css" 2>/dev/null || cp -f "${SCRIPT_DIR}/chrome/userContent.css" "${profile_dir}/chrome/userContent.css"
 
     success "Configured ${profile_dir}"
     found_profile=1
@@ -54,5 +56,5 @@ if [[ $found_profile -eq 0 ]]; then
     warn "No existing Firefox profile found."
     warn "Launch Firefox once to initialize a default profile, then rerun this script."
 else
-    success "All detected Firefox profiles are now configured with Catppuccin Mocha!"
+    success "All detected Firefox profiles are now configured with Catppuccin Mocha + Zen UI!"
 fi
