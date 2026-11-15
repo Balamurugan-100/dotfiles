@@ -23,6 +23,7 @@ atuin = "latest"
 fastfetch = "latest"
 "pipx:thefuck" = "latest"
 delta = "latest"
+opencode = { version = "latest", allow_builds = ["@opencode/cli"] }
 
 
 [settings]

@@ -185,7 +185,10 @@ hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
 
 -- ── COSMIC-Style Smart Window & Workspace Switching ────────────────
 -- If 1 window per screen, switches directly between app screens / workspaces!
--- If multiple windows on screen, moves focus between them and wraps across screens!
+-- Visits max_occupied + 1 (first empty workspace) before wrapping to 1!
+local switch_ws = home .. "/.config/hypr/scripts/switch_workspace.sh"
+local move_ws   = home .. "/.config/hypr/scripts/move_to_workspace.sh"
+
 local function smart_switch(direction, cycle_prev)
     local ws = hl.get_active_workspace()
     local wins = hl.get_workspace_windows(ws)
@@ -193,9 +196,9 @@ local function smart_switch(direction, cycle_prev)
     -- Single app on screen: switch to next/prev screen/workspace immediately
     if #wins <= 1 then
         if cycle_prev then
-            hl.dispatch(hl.dsp.focus({ workspace = "e-1" }))
+            hl.dispatch(hl.dsp.exec_cmd(switch_ws .. " prev"))
         else
-            hl.dispatch(hl.dsp.focus({ workspace = "e+1" }))
+            hl.dispatch(hl.dsp.exec_cmd(switch_ws .. " next"))
         end
         return
     end
@@ -208,9 +211,9 @@ local function smart_switch(direction, cycle_prev)
     -- Hit the edge/boundary of windows on screen: switch to next/prev screen!
     if not before or not after or before == after then
         if cycle_prev then
-            hl.dispatch(hl.dsp.focus({ workspace = "e-1" }))
+            hl.dispatch(hl.dsp.exec_cmd(switch_ws .. " prev"))
         else
-            hl.dispatch(hl.dsp.focus({ workspace = "e+1" }))
+            hl.dispatch(hl.dsp.exec_cmd(switch_ws .. " next"))
         end
     end
 end
@@ -221,11 +224,9 @@ local function smart_move(direction, cycle_prev)
 
     if #wins <= 1 then
         if cycle_prev then
-            hl.dispatch(hl.dsp.window.move({ workspace = "e-1" }))
-            hl.dispatch(hl.dsp.focus({ workspace = "e-1" }))
+            hl.dispatch(hl.dsp.exec_cmd(move_ws .. " prev"))
         else
-            hl.dispatch(hl.dsp.window.move({ workspace = "e+1" }))
-            hl.dispatch(hl.dsp.focus({ workspace = "e+1" }))
+            hl.dispatch(hl.dsp.exec_cmd(move_ws .. " next"))
         end
         return
     end
@@ -235,11 +236,9 @@ local function smart_move(direction, cycle_prev)
     local after = hl.get_window("active")
     if not before or not after or before == after then
         if cycle_prev then
-            hl.dispatch(hl.dsp.window.move({ workspace = "e-1" }))
-            hl.dispatch(hl.dsp.focus({ workspace = "e-1" }))
+            hl.dispatch(hl.dsp.exec_cmd(move_ws .. " prev"))
         else
-            hl.dispatch(hl.dsp.window.move({ workspace = "e+1" }))
-            hl.dispatch(hl.dsp.focus({ workspace = "e+1" }))
+            hl.dispatch(hl.dsp.exec_cmd(move_ws .. " next"))
         end
     end
 end
