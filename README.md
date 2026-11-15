@@ -33,7 +33,7 @@ Both **Hyprland** (Linux) and **AeroSpace** (macOS) share identical ergonomics:
 | Action | Linux (Hyprland) | macOS (AeroSpace) |
 | :--- | :--- | :--- |
 | **Terminal (Kitty)** | <kbd>Super</kbd> + <kbd>T</kbd> or <kbd>Return</kbd> | <kbd>Alt</kbd> + <kbd>T</kbd> or <kbd>Return</kbd> |
-| **Browser (Zen / Firefox)** | <kbd>Super</kbd> + <kbd>B</kbd> | <kbd>Alt</kbd> + <kbd>B</kbd> |
+| **Browser (Zen / Firefox)** | Open via Vicinae (<kbd>Super</kbd> + <kbd>Space</kbd>) | Open via Raycast (<kbd>Alt</kbd> + <kbd>Space</kbd>) |
 | **Launcher / Search** | <kbd>Super</kbd> + <kbd>Space</kbd> (Vicinae) | <kbd>Alt</kbd> + <kbd>Space</kbd> (Raycast) |
 | **Clipboard History** | <kbd>Super</kbd> + <kbd>V</kbd> (Vicinae) | <kbd>Alt</kbd> + <kbd>V</kbd> (Raycast) |
 | **Emoji Picker** | <kbd>Super</kbd> + <kbd>.</kbd> (Vicinae) | <kbd>Alt</kbd> + <kbd>.</kbd> (Raycast) |

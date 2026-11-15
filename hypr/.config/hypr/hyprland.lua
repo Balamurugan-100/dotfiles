@@ -49,8 +49,8 @@ hl.env("VISUAL", "zed")
 -- ── Look and Feel ──────────────────────────────────────────────────
 hl.config({
     general = {
-        gaps_in  = 4,
-        gaps_out = 8,
+        gaps_in  = 3,
+        gaps_out = 3,
         border_size = 2,
         col = {
             active_border   = { colors = {"rgba(89b4faff)", "rgba(cba6f7ff)"}, angle = 45 },
@@ -149,7 +149,6 @@ local wayle_toggle = home .. "/.local/bin/wayle panel toggle"
 -- Applications Binds
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(clipboard))
 hl.bind(mainMod .. " + Period", hl.dsp.exec_cmd(emoji_picker))
