@@ -31,9 +31,10 @@ user_pref("browser.uidensity", 1);
 user_pref("browser.tabs.tabmanager.enabled", false);
 user_pref("browser.tabs.inTitlebar", 1);
 
-// 6. Zen UI: Native Vertical Tabs & Modern Sidebar
+// 6. Zen UI: Native Vertical Tabs on Right Side & Modern Sidebar
 user_pref("sidebar.revamp", true);
 user_pref("sidebar.verticalTabs", true);
+user_pref("sidebar.position_start", false);
 user_pref("sidebar.visibility", "always-show");
 
 // 7. Privacy & Disable Telemetry

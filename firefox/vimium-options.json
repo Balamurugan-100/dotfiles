@@ -1,0 +1,6 @@
+{
+  "settingsVersion": "2.1.2",
+  "keyMappings": "# Copy Current URL (Ctrl+Shift+C and yy)\nmap <c-s-c> copyCurrentUrl\nmap <c-C> copyCurrentUrl\nmap yy copyCurrentUrl\n\n# Navigation (Vim Keys)\nmap j scrollDown\nmap k scrollUp\nmap d scrollPageDown\nmap u scrollPageUp\nmap gg scrollToTop\nmap G scrollToBottom\n\n# Tabs on Right Side\nmap J previousTab\nmap K nextTab\nmap gT previousTab\nmap gt nextTab\nmap x removeTab\nmap X restoreTab\nmap t createTab\nmap r reload\nmap R reload hard\n\n# Link Hints\nmap f LinkHints.activate\nmap F LinkHints.activateOpenInNewTab\nmap yf LinkHints.activateCopyLinkUrl",
+  "linkHintCharacters": "sadfjklewcmpgh",
+  "userDefinedCSS": "div > .vimiumHintMarker {\n  background: #f9e2af !important;\n  border: 1px solid #fab387 !important;\n  border-radius: 4px !important;\n  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;\n}\ndiv > .vimiumHintMarker > span {\n  color: #1e1e2e !important;\n  font-family: 'JetBrainsMono Nerd Font', monospace !important;\n  font-weight: bold !important;\n  font-size: 11px !important;\n  text-shadow: none !important;\n}\n#vomnibar {\n  background: #1e1e2e !important;\n  border: 1px solid #313244 !important;\n  border-radius: 8px !important;\n}\n#vomnibar input {\n  color: #cdd6f4 !important;\n  font-family: 'JetBrainsMono Nerd Font', monospace !important;\n}"
+}

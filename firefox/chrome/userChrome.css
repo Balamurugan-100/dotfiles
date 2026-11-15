@@ -54,11 +54,11 @@
   background-color: var(--ctp-crust) !important;
 }
 
-/* ── 2. Zen Signature: Floating Rounded Web Viewport ─────────────────────── */
+/* ── 2. Zen Signature: Floating Rounded Web Viewport (Tabs on Right) ────── */
 #tabbrowser-tabpanels {
   background-color: var(--ctp-base) !important;
   border-radius: 10px !important;
-  margin: 0 8px 8px 8px !important;
+  margin: 0 0 8px 8px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
   border: 1px solid var(--ctp-surface0) !important;
   overflow: hidden !important;
@@ -89,11 +89,12 @@
   box-shadow: 0 0 0 1px var(--ctp-mauve) !important;
 }
 
-/* ── 4. Vertical Tabs Sidebar (Zen-style drawer) ─────────────────────────── */
+/* ── 4. Vertical Tabs Sidebar (Right-side drawer) ────────────────────────── */
 #sidebar-box,
 #sidebar-main {
   background-color: var(--ctp-mantle) !important;
-  border-right: 1px solid var(--ctp-surface0) !important;
+  border-left: 1px solid var(--ctp-surface0) !important;
+  border-right: none !important;
 }
 
 #sidebar-header {

@@ -86,17 +86,30 @@ Both **Zen Browser** and **Firefox** profiles are declarative and reproducible a
 ```
 zen/
 ├── setup_zen.sh          # Auto-links profile configuration
-├── user.js               # Hardware accel (VAAPI), WebRender, smooth scroll & privacy
+├── user.js               # Hardware accel (VAAPI), smooth scroll, privacy, tabs on right
+├── vimium-options.json   # Vimium / Vimium C keymaps & Catppuccin Mocha theme
 └── chrome/
-    ├── userChrome.css    # Catppuccin Mocha UI for Zen Browser
+    ├── userChrome.css    # Catppuccin Mocha UI for Zen Browser (right-side tabs)
     └── userContent.css   # Catppuccin Mocha for internal / newtab pages
 
 firefox/
 ├── setup_firefox.sh      # Auto-links profile configuration
-├── user.js               # Privacy & performance flags
+├── user.js               # Native vertical tabs on right side, privacy & performance
+├── vimium-options.json   # Vimium / Vimium C keymaps & Catppuccin Mocha theme
 └── chrome/
-    ├── userChrome.css    # Catppuccin Mocha UI for Firefox
+    ├── userChrome.css    # Zen UI (floating container, right-side vertical tabs)
     └── userContent.css   # Catppuccin Mocha for internal pages
+```
+
+### ⌨️ Vimium Keybindings (Ctrl+Shift+C to Copy URL)
+Both browsers support reproducible Vimium / Vimium C configurations stored in `vimium-options.json`:
+* <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> or <kbd>yy</kbd> $\rightarrow$ Copy Current URL
+* <kbd>J</kbd> / <kbd>K</kbd> (or <kbd>gT</kbd> / <kbd>gt</kbd>) $\rightarrow$ Previous / Next Tab (tabs on right)
+* <kbd>x</kbd> / <kbd>X</kbd> $\rightarrow$ Close Tab / Restore Closed Tab
+* <kbd>t</kbd> $\rightarrow$ Create New Tab
+* <kbd>f</kbd> / <kbd>F</kbd> $\rightarrow$ Open Link Hint (Current / New Tab)
+* <kbd>j</kbd> / <kbd>k</kbd> / <kbd>d</kbd> / <kbd>u</kbd> $\rightarrow$ Smooth scrolling (Vim keys)
+*(To import: Open Vimium Options $\rightarrow$ Show Advanced Options $\rightarrow$ Restore from Backup / paste `vimium-options.json`)*.
 ```
 
 Run either script anytime to apply the configuration to any local profile (Linux Flatpak, native Linux, or macOS):

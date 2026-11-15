@@ -50,3 +50,4 @@ user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
 user_pref("zen.theme.accent-color", "#cba6f7");
 user_pref("zen.view.use-single-toolbar", true);
 user_pref("zen.view.compact", true);
+user_pref("zen.tabs.vertical.right-side", true);
