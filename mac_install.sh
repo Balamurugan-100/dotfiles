@@ -46,26 +46,13 @@ else
     brew update
 fi
 
-# ── 3. Install CLI & GUI Tools via Homebrew ───────────────────────────────────
-step "3. Installing Homebrew formulas & casks..."
+# ── 3. Base Host Dependencies & GUI Casks ──────────────────────────────────────
+step "3. Installing minimal host bootstrap & GUI casks..."
 brew_formulas=(
     git
     zsh
     stow
     mise
-    neovim
-    tmux
-    fzf
-    zoxide
-    jq
-    btop
-    lazygit
-    atuin
-    jandedobbeleer/oh-my-posh/oh-my-posh
-    ripgrep
-    fd
-    bat
-    eza
 )
 
 for pkg in "${brew_formulas[@]}"; do
