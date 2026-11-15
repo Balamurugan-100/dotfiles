@@ -1,8 +1,13 @@
 /* ==========================================================================
-   Catppuccin Mocha Theme for Firefox
+   Zen Browser UI Experience for Firefox (Catppuccin Mocha)
+   Transforms generic Firefox into the modern, keyboard-friendly Zen layout:
+   - Compact unified toolbar
+   - Floating rounded web viewport
+   - Sleek vertical tabs / auto-expanding sidebar
    ========================================================================== */
 
 :root {
+  /* Catppuccin Mocha Palette */
   --ctp-rosewater: #f5e0dc;
   --ctp-flamingo: #f2cdcd;
   --ctp-pink: #f5c2e7;
@@ -30,6 +35,7 @@
   --ctp-mantle: #181825;
   --ctp-crust: #11111b;
 
+  /* Theme mappings */
   --toolbar-bgcolor: var(--ctp-mantle) !important;
   --toolbar-color: var(--ctp-text) !important;
   --tab-selected-bgcolor: var(--ctp-surface0) !important;
@@ -38,16 +44,44 @@
   --toolbar-field-color: var(--ctp-text) !important;
   --toolbar-field-border-color: var(--ctp-surface0) !important;
   --toolbar-field-focus-border-color: var(--ctp-mauve) !important;
+  --lwt-sidebar-background-color: var(--ctp-mantle) !important;
 }
 
-#browser, #navigator-toolbox, #sidebar-box {
-  background-color: var(--ctp-mantle) !important;
+/* ── 1. Window Frame & Background ────────────────────────────────────────── */
+#main-window,
+#browser,
+#navigator-toolbox {
+  background-color: var(--ctp-crust) !important;
+}
+
+/* ── 2. Zen Signature: Floating Rounded Web Viewport ─────────────────────── */
+#tabbrowser-tabpanels {
+  background-color: var(--ctp-base) !important;
+  border-radius: 10px !important;
+  margin: 0 8px 8px 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid var(--ctp-surface0) !important;
+  overflow: hidden !important;
+}
+
+/* ── 3. Compact Navigation Bar ───────────────────────────────────────────── */
+#nav-bar {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 8px !important;
+}
+
+#urlbar-container {
+  max-width: 680px !important;
+  margin: 0 auto !important;
 }
 
 #urlbar-background {
-  background-color: var(--ctp-base) !important;
+  background-color: var(--ctp-mantle) !important;
   border: 1px solid var(--ctp-surface0) !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 #urlbar[focused="true"] > #urlbar-background {
@@ -55,12 +89,41 @@
   box-shadow: 0 0 0 1px var(--ctp-mauve) !important;
 }
 
+/* ── 4. Vertical Tabs Sidebar (Zen-style drawer) ─────────────────────────── */
+#sidebar-box,
+#sidebar-main {
+  background-color: var(--ctp-mantle) !important;
+  border-right: 1px solid var(--ctp-surface0) !important;
+}
+
+#sidebar-header {
+  border-bottom: 1px solid var(--ctp-surface0) !important;
+  background-color: var(--ctp-mantle) !important;
+}
+
+/* Tab buttons inside vertical sidebar */
+.tabbrowser-tab {
+  border-radius: 8px !important;
+  margin: 2px 4px !important;
+}
+
 .tab-background[selected="true"] {
   background-color: var(--ctp-surface0) !important;
   border: 1px solid var(--ctp-surface1) !important;
-  border-radius: 6px !important;
+  border-radius: 8px !important;
 }
 
-.tab-background {
-  transition: background-color 0.15s ease, border-color 0.15s ease !important;
+.tab-background:hover:not([selected="true"]) {
+  background-color: var(--ctp-surface0) !important;
+  opacity: 0.7 !important;
+  border-radius: 8px !important;
+}
+
+/* ── 5. Auto-hiding / Collapsing Elements ─────────────────────────────────── */
+/* Clean findbar */
+findbar {
+  background-color: var(--ctp-mantle) !important;
+  border: 1px solid var(--ctp-surface0) !important;
+  border-radius: 8px !important;
+  margin: 8px !important;
 }

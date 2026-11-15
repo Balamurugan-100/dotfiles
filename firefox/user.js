@@ -1,5 +1,5 @@
 // ─── Firefox Reproducible user.js ───────────────────────────────────────────
-// Catppuccin Mocha + Wayland/macOS Performance + Privacy & Smooth Scrolling
+// Catppuccin Mocha + Wayland/macOS Performance + Privacy + Zen UI Experience
 
 // 1. Enable custom CSS stylesheets (userChrome.css & userContent.css)
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
@@ -29,8 +29,14 @@ user_pref("general.smoothScroll.pages.durationMaxMS", 150);
 user_pref("browser.compactmode.show", true);
 user_pref("browser.uidensity", 1);
 user_pref("browser.tabs.tabmanager.enabled", false);
+user_pref("browser.tabs.inTitlebar", 1);
 
-// 6. Privacy & Disable Telemetry
+// 6. Zen UI: Native Vertical Tabs & Modern Sidebar
+user_pref("sidebar.revamp", true);
+user_pref("sidebar.verticalTabs", true);
+user_pref("sidebar.visibility", "always-show");
+
+// 7. Privacy & Disable Telemetry
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 user_pref("toolkit.telemetry.unified", false);
@@ -40,7 +46,7 @@ user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("extensions.pocket.enabled", false);
 
-// 7. Clean New Tab Page (No Ads or Sponsored Content)
+// 8. Clean New Tab Page (No Ads or Sponsored Content)
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
