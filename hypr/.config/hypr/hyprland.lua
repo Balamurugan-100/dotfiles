@@ -110,20 +110,37 @@ hl.animation({ leaf = "border",     enabled = true,  speed = 10.0, bezier = "def
 hl.animation({ leaf = "fade",       enabled = true,  speed = 3.0, bezier = "md3_decel" })
 hl.animation({ leaf = "workspaces", enabled = true,  speed = 5.0, bezier = "menu_decel", style = "slide" })
 
--- ── Native Hyprland Autostart ────────────────────────────────────────
--- Run autostart.sh once per Hyprland instance (equivalent to exec-once).
--- Note: hl.on("hyprland.start", ...) is NOT emitted by Hyprland 0.57.x,
--- so we launch directly with an instance guard.
-local sig = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
-local runtime = os.getenv("XDG_RUNTIME_DIR") or ("/run/user/" .. (os.getenv("UID") or "1000"))
-local autostart_lock = runtime .. "/hypr/" .. (sig or "default") .. "/.autostart_completed"
+-- ── Native Hyprland Autostart (exec-once) ───────────────────────────
+-- Fires once per Hyprland session, after the compositor is up. A top-level
+-- hl.exec_cmd() would instead run on every config reload, like `exec`.
+hl.on("hyprland.start", function()
+    -- Sync the session environment, then activate the systemd session so the
+    -- services it pulls in (vicinae, portals) can find the Wayland display.
+    -- graphical-session.target refuses manual starts, so go through the
+    -- Hyprland-specific unit that binds to it.
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE && systemctl --user start hyprland-session.target")
 
-local lock_fd = io.open(autostart_lock, "r")
-if not lock_fd then
-    hl.exec_cmd(home .. "/.config/hypr/scripts/autostart.sh")
-else
-    lock_fd:close()
-end
+    -- Visual session applications
+    hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("wayle shell")
+
+    -- Background daemons. Their systemd units are masked because the GDM
+    -- greeter also pulls them in, so they are launched directly here.
+    hl.exec_cmd("hypridle")
+    hl.exec_cmd("/usr/libexec/hyprpolkitagent")
+
+    -- Clipboard history
+    hl.exec_cmd("wl-paste --type text --watch cliphist store")
+    hl.exec_cmd("wl-paste --type image --watch cliphist store")
+end)
+
+-- Tear the systemd session down while the compositor is still alive. Without
+-- this, portals survive logout, crash when the Wayland socket disappears and
+-- restart-loop into the gap before the next session, leaving a broken portal
+-- stack that stalls the first GTK app (Wayle) by ~45s at login.
+hl.on("hyprland.shutdown", function()
+    os.execute("systemctl --user stop hyprland-session.target && sleep 0.1")
+end)
 
 -- ── Applications & Native Vicinae Tools ─────────────────────────────
 local mainMod = "SUPER"
