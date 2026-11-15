@@ -111,7 +111,7 @@ remove_if_not_symlink "$HOME/.taskrc"
 remove_if_not_symlink "$HOME/.profile"
 
 # .config directory symlinks
-for dir in nvim kitty tmux tmuxp starship ghostty lazygit mise btop aerospace shell broot cava zed atuin doom oh-my-posh; do
+for dir in nvim kitty tmux tmuxp starship ghostty lazygit mise btop aerospace shell broot cava zed atuin doom oh-my-posh hypr wayle; do
     remove_if_not_symlink "$HOME/.config/$dir"
 done
 
@@ -128,7 +128,7 @@ info "Stowing packages..."
 packages=(
     nvim kitty tmux tmuxp starship ghostty lazygit mise btop
     aerospace shell broot cava zed atuin doom oh-my-posh
-    bash zsh git task profile
+    bash zsh git task profile hypr wayle
 )
 
 for pkg in "${packages[@]}"; do

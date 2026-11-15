@@ -1,0 +1,159 @@
+# ====================================================================
+# Wayle Desktop Shell Configuration
+# Minimal, unified desktop bar, notifications, OSD, and wallpaper
+# ====================================================================
+
+[general]
+font-sans = "JetBrainsMono Nerd Font"
+font-mono = "JetBrainsMono Nerd Font Mono"
+tearing-mode = false
+
+[bar]
+scale = 1.0
+inset-edge = 8.0
+inset-ends = 12.0
+padding = 0.35
+padding-ends = 0.5
+module-gap = 0.5
+location = "top"
+exclusive = true
+layer = "top"
+bg = "bg-surface"
+background-opacity = 85
+border-location = "all"
+border-width = 1
+border-color = "border-default"
+rounding = "md"
+shadow = "floating"
+
+button-variant = "block-prefix"
+button-opacity = 100
+button-bg-opacity = 100
+button-icon-size = 1.0
+button-icon-padding = 0.8
+button-label-size = 1.0
+button-label-weight = "semibold"
+button-label-padding = 0.8
+button-rounding = "sm"
+button-gap = 0.8
+button-icon-position = "start"
+button-border-location = "none"
+button-border-width = 1
+
+button-group-border-location = "none"
+button-group-border-width = 1
+button-group-padding = 0.0
+button-group-module-gap = 0.25
+button-group-background = "bg-elevated"
+button-group-opacity = 90
+button-group-border-color = "border-accent"
+button-group-rounding = "sm"
+
+dropdown-shadow = true
+dropdown-opacity = 95
+dropdown-autohide = true
+dropdown-freeze-label = true
+
+[[bar.layout]]
+monitor = "*"
+show = true
+left = ["hyprland-workspaces", "window-title"]
+center = ["clock"]
+right = [
+    "volume",
+    "brightness",
+    "network",
+    "bluetooth",
+    "battery",
+    "notifications",
+    "power",
+]
+
+[styling]
+scale = 1.0
+rounding = "md"
+theme-provider = "wayle"
+theming-monitor = ""
+
+[styling.palette]
+bg = "#1e1e2e"
+surface = "#181825"
+elevated = "#313244"
+fg = "#cdd6f4"
+fg-muted = "#a6adc8"
+primary = "#cba6f7"
+red = "#f38ba8"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+blue = "#89b4fa"
+
+# ── Modules ───────────────────────────────────────────────────────
+[modules.hyprland-workspaces]
+min-workspace-count = 5
+monitor-specific = false
+show-special = true
+urgent-show = true
+display-mode = "label"
+numbering = "absolute"
+active-indicator = "background"
+active-color = "accent"
+occupied-color = "fg-default"
+empty-color = "fg-muted"
+container-bg-color = "bg-surface"
+border-show = false
+
+[modules.window-title]
+show-icon = false
+max-length = 35
+
+[modules.clock]
+format = "%a, %b %d  %H:%M"
+
+[modules.volume]
+icon-muted = "ld-volume-x-symbolic"
+icon-low = "ld-volume-symbolic"
+icon-medium = "ld-volume-1-symbolic"
+icon-high = "ld-volume-2-symbolic"
+
+[modules.brightness]
+icon-low = "ld-sun-dim-symbolic"
+icon-medium = "ld-sun-medium-symbolic"
+icon-high = "ld-sun-symbolic"
+
+[modules.network]
+show-ip = false
+
+[modules.bluetooth]
+
+[modules.battery]
+
+[modules.notifications]
+icon = "ld-bell-symbolic"
+icon-empty = "ld-bell-off-symbolic"
+
+[modules.power]
+icon = "ld-power-symbolic"
+
+[osd]
+enabled = true
+position = "bottom"
+duration = 2000
+margin = 80.0
+border = true
+layer = "overlay"
+
+[wallpaper]
+engine-enabled = true
+transition-type = "simple"
+transition-duration = 0.7
+transition-fps = 60
+cycling-enabled = false
+cycling-directory = "/home/kaizen/.config/hypr/wallpapers"
+cycling-mode = "sequential"
+cycling-interval-mins = 30
+cycling-same-image = false
+
+[[wallpaper.monitors]]
+name = "*"
+wallpaper = "/home/kaizen/.config/hypr/wallpapers/default.jpg"
+fit-mode = "fill"
