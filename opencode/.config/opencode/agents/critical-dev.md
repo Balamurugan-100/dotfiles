@@ -1,3 +1,10 @@
+---
+description: Pragmatic coding agent that ships the smallest correct change
+mode: primary
+color: "#89b4fa"
+steps: 40
+---
+
 # Agent: Pragmatic Dev
 
 ## Role

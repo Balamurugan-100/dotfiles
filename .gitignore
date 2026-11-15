@@ -47,3 +47,6 @@ target/
 *mdb/
 *.db
 **/runtime.toml
+
+# OpenCode background service credentials (generated per machine)
+opencode/.config/opencode/service.json

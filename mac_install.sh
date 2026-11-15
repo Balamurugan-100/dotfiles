@@ -94,6 +94,7 @@ mac_packages=(
     oh-my-posh
     zsh
     git
+    opencode
 )
 
 for pkg in "${mac_packages[@]}"; do
@@ -104,6 +105,17 @@ for pkg in "${mac_packages[@]}"; do
         warn "Package ${pkg} directory not found, skipping."
     fi
 done
+
+# OpenCode skills (kept in sync from the user's GitHub skills repo)
+OPENCODE_SKILLS_DIR="${HOME}/.local/share/opencode/skills/balamurugan-100"
+if [[ -d "${OPENCODE_SKILLS_DIR}/.git" ]]; then
+    info "Updating OpenCode skills..."
+    git -C "${OPENCODE_SKILLS_DIR}" pull --ff-only || warn "Could not update OpenCode skills"
+else
+    info "Cloning OpenCode skills..."
+    mkdir -p "$(dirname "${OPENCODE_SKILLS_DIR}")"
+    git clone --depth 1 https://github.com/Balamurugan-100/skills.git "${OPENCODE_SKILLS_DIR}" || warn "Could not clone OpenCode skills"
+fi
 
 # ── 5. Mise Polyglot Runtimes ─────────────────────────────────────────────────
 step "5. Installing mise tools from config..."

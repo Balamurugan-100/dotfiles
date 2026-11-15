@@ -38,7 +38,6 @@ if ! command -v stow &>/dev/null; then
         error "stow not found. Please install GNU Stow."
     fi
 fi
-fi
 
 # ─── 3. Remove conflicting existing files ────────────────────────────────────
 info "Removing conflicting existing configs..."
@@ -67,6 +66,14 @@ for dir in nvim kitty tmux lazygit mise btop zed atuin oh-my-posh hypr wayle vic
     remove_if_not_symlink "$HOME/.config/$dir"
 done
 
+# OpenCode config files (keep the generated service.json untouched)
+remove_if_not_symlink "$HOME/.config/opencode/opencode.json"
+remove_if_not_symlink "$HOME/.config/opencode/cli.json"
+remove_if_not_symlink "$HOME/.config/opencode/AGENTS.md"
+remove_if_not_symlink "$HOME/.config/opencode/agents"
+remove_if_not_symlink "$HOME/.config/opencode/commands"
+remove_if_not_symlink "$HOME/.config/opencode/memory"
+
 # Remove orphan nvim symlinks from .config
 remove_if_not_symlink "$HOME/.config/init.lua"
 remove_if_not_symlink "$HOME/.config/lua"
@@ -80,13 +87,13 @@ info "Stowing packages..."
 if [[ "$(uname)" == "Darwin" ]]; then
     packages=(
         aerospace nvim kitty tmux lazygit mise btop
-        zed atuin oh-my-posh zsh git
+        zed atuin oh-my-posh zsh git opencode
     )
 else
     packages=(
         nvim kitty tmux lazygit mise btop
         zed atuin oh-my-posh
-        zsh git hypr wayle vicinae
+        zsh git hypr wayle vicinae opencode
     )
 fi
 
@@ -98,6 +105,17 @@ for pkg in "${packages[@]}"; do
         warn "Package $pkg not found, skipping"
     fi
 done
+
+# ─── OpenCode skills ─────────────────────────────────────────────────────────
+OPENCODE_SKILLS_DIR="$HOME/.local/share/opencode/skills/balamurugan-100"
+if [[ -d "$OPENCODE_SKILLS_DIR/.git" ]]; then
+    info "Updating OpenCode skills..."
+    git -C "$OPENCODE_SKILLS_DIR" pull --ff-only || warn "Could not update OpenCode skills"
+else
+    info "Cloning OpenCode skills..."
+    mkdir -p "$(dirname "$OPENCODE_SKILLS_DIR")"
+    git clone --depth 1 https://github.com/Balamurugan-100/skills.git "$OPENCODE_SKILLS_DIR" || warn "Could not clone OpenCode skills"
+fi
 
 # ─── 5. Install mise tools ───────────────────────────────────────────────────
 info "Installing mise tools from config..."

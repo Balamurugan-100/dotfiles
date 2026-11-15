@@ -19,6 +19,7 @@ A modern, minimal, keyboard-driven dotfiles ecosystem unified under the **Catppu
 | **Multiplexer** | **Tmux** (Catppuccin + `wl-copy`) | **Tmux** (Catppuccin) | [`tmux/`](file:///home/kaizen/dotfiles/tmux/.config/tmux/tmux.conf) |
 | **System Monitor** | **btop** (Catppuccin Mocha) | **btop** (Catppuccin Mocha) | [`btop/`](file:///home/kaizen/dotfiles/btop/.config/btop/btop.conf) |
 | **Git Interface** | **Lazygit** & CLI | **Lazygit** & CLI | [`lazygit/`](file:///home/kaizen/dotfiles/lazygit/.config/lazygit/config.yml) |
+| **AI Agent CLI** | **OpenCode** (V2, Catppuccin Mocha) | **OpenCode** | [`opencode/`](file:///home/kaizen/dotfiles/opencode/.config/opencode/opencode.json) |
 | **Runtime Manager**| **Mise** (Node, Python, Go, Rust, tools) | **Mise** | [`mise/`](file:///home/kaizen/dotfiles/mise/.config/mise/config.toml) |
 
 ---
@@ -39,6 +40,7 @@ Both **Hyprland** (Linux) and **AeroSpace** (macOS) share identical ergonomics:
 | **Emoji Picker** | <kbd>Super</kbd> + <kbd>.</kbd> (Vicinae) | <kbd>Alt</kbd> + <kbd>.</kbd> (Raycast) |
 | **Terminal Editor (Neovim)** | <kbd>Super</kbd> + <kbd>C</kbd> | <kbd>Alt</kbd> + <kbd>C</kbd> |
 | **GUI Editor (Zed)** | <kbd>Super</kbd> + <kbd>Z</kbd> | <kbd>Alt</kbd> + <kbd>Z</kbd> |
+| **AI Agent (OpenCode)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> |
 | **Cycle Windows** | <kbd>Alt</kbd> + <kbd>Tab</kbd> (Native cycling) | <kbd>Alt</kbd> + <kbd>Tab</kbd> (Native cycling) |
 | **Focus Window (Vim)** | <kbd>Super</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> | <kbd>Alt</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> |
 | **Move Window (Vim)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> |
@@ -76,6 +78,27 @@ git clone https://github.com/your-username/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./mac_install.sh
 ```
+
+---
+
+## 🤖 OpenCode (AI Agent CLI)
+
+OpenCode is installed through **mise** and stowed from [`opencode/`](file:///home/kaizen/dotfiles/opencode/.config/opencode/opencode.json). The same configuration is shared across Linux and macOS:
+
+```
+opencode/.config/opencode/
+├── opencode.json         # zsh shell, default model, permissions, formatter
+├── cli.json              # Catppuccin Mocha theme, cursor, layout, keybinds
+├── AGENTS.md             # Global engineering guidelines
+├── agents/               # reviewer, query, and critical-dev agents
+└── commands/             # /review and /commit
+```
+
+Skills are loaded from the [`Balamurugan-100/skills`](https://github.com/Balamurugan-100/skills) GitHub repo, cloned to `~/.local/share/opencode/skills/balamurugan-100`. The install scripts clone it on first run and `git pull` it on later runs; you can also update it manually with `git -C ~/.local/share/opencode/skills/balamurugan-100 pull --ff-only`.
+
+The default model is `opencode/big-pickle`, which works without extra provider credentials. To use another provider, run `opencode auth login`, then update `model` in `opencode.json`.
+
+Launch it with <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> on Linux or <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> on macOS, or run the `oc` shell alias (auto-approve mode).
 
 ---
 

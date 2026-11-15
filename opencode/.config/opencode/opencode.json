@@ -1,4 +1,34 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "skills": []
+  "shell": "/bin/zsh",
+  "model": "opencode/big-pickle",
+  "default_agent": "build",
+  "update": "notify",
+  "share": "disabled",
+  "skills": [
+    "~/.local/share/opencode/skills/balamurugan-100"
+  ],
+  "permissions": [
+    { "action": "read", "resource": "**/secrets.*", "effect": "ask" },
+    { "action": "external_directory", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "sudo *", "effect": "ask" },
+    { "action": "shell", "resource": "rm -rf *", "effect": "ask" },
+    { "action": "shell", "resource": "git push *", "effect": "ask" }
+  ],
+  "watcher": {
+    "ignore": [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/target/**",
+      "**/__pycache__/**",
+      "**/.venv/**",
+      "**/.mypy_cache/**",
+      "**/*.log"
+    ]
+  },
+  "formatter": true,
+  "experimental": {
+    "todo": true
+  }
 }

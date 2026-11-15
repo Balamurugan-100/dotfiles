@@ -136,12 +136,23 @@ fi
 
 # ── 6. Stow Dotfiles ──────────────────────────────────────────────
 step "6. Stowing Hyprland and Wayle configurations..."
-for pkg in hypr wayle vicinae; do
+for pkg in hypr wayle vicinae opencode; do
     if [[ -d "${DOTFILES_DIR}/${pkg}" ]]; then
         info "Stowing ${pkg} → ~/..."
         stow -v -d "${DOTFILES_DIR}" -t "${HOME}" --restow "${pkg}" 2>&1 | tail -1
     fi
 done
+
+# OpenCode skills (kept in sync from the user's GitHub skills repo)
+OPENCODE_SKILLS_DIR="${HOME}/.local/share/opencode/skills/balamurugan-100"
+if [[ -d "${OPENCODE_SKILLS_DIR}/.git" ]]; then
+    info "Updating OpenCode skills..."
+    git -C "${OPENCODE_SKILLS_DIR}" pull --ff-only || warn "Could not update OpenCode skills"
+else
+    info "Cloning OpenCode skills..."
+    mkdir -p "$(dirname "${OPENCODE_SKILLS_DIR}")"
+    git clone --depth 1 https://github.com/Balamurugan-100/skills.git "${OPENCODE_SKILLS_DIR}" || warn "Could not clone OpenCode skills"
+fi
 
 # Ensure all helper scripts have execute permissions
 chmod +x "${DOTFILES_DIR}/hypr/.config/hypr/scripts/"*.sh 2>/dev/null || true

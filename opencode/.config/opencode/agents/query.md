@@ -1,3 +1,9 @@
+---
+description: Researches questions with evidence, citations, and explicit uncertainty
+mode: all
+color: "#94e2d5"
+---
+
 # Agent: Query Mode
 
 ## Role
