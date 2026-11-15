@@ -12,6 +12,9 @@ hl.monitor({
 })
 
 -- ── Environment Variables ──────────────────────────────────────────
+local home = os.getenv("HOME") or "/home/kaizen"
+hl.env("PATH", home .. "/.local/bin:" .. (os.getenv("PATH") or ""))
+
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
@@ -121,7 +124,7 @@ hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/autostart.sh")
 local mainMod = "SUPER"
 
 local terminal     = "kitty"
-local browser      = "zen"
+local browser      = home .. "/.local/bin/zen"
 local filemanager  = "nautilus"
 local filemgr_cli  = "kitty -e yazi"
 local editor_gui   = "zed"
@@ -132,12 +135,14 @@ local clipboard    = "vicinae cmd launch clipboard:history"
 local win_switcher = "vicinae cmd launch wm:switch-windows"
 local emoji_picker = "vicinae cmd launch core:search-emojis"
 local file_search  = "vicinae cmd launch files:search"
-local nightlight   = os.getenv("HOME") .. "/.config/hypr/scripts/toggle_nightlight.sh"
+local nightlight   = home .. "/.config/hypr/scripts/toggle_nightlight.sh"
+local wayle_toggle = home .. "/.local/bin/wayle panel toggle"
 
 -- Applications Binds
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(clipboard))
 hl.bind(mainMod .. " + Period", hl.dsp.exec_cmd(emoji_picker))
@@ -150,8 +155,9 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor_cli))
 hl.bind(mainMod .. " + CTRL + N", hl.dsp.exec_cmd(nightlight))
 
 -- Topbar Menubar Toggle (Mac-style show/hide)
-hl.bind(mainMod .. " + Backspace", hl.dsp.exec_cmd("wayle panel toggle"))
-hl.bind(mainMod .. " + ALT + B", hl.dsp.exec_cmd("wayle panel toggle"))
+hl.bind(mainMod .. " + Backspace", hl.dsp.exec_cmd(wayle_toggle))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(wayle_toggle))
+hl.bind(mainMod .. " + ALT + B", hl.dsp.exec_cmd(wayle_toggle))
 
 -- Window Management
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
