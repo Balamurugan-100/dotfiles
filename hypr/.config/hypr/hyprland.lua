@@ -140,7 +140,6 @@ local editor_cli   = "kitty -e nvim"
 
 local launcher     = "vicinae toggle"
 local clipboard    = "vicinae cmd launch clipboard:history"
-local win_switcher = "vicinae cmd launch wm:switch-windows"
 local emoji_picker = "vicinae cmd launch core:search-emojis"
 local file_search  = "vicinae cmd launch files:search"
 local nightlight   = home .. "/.config/hypr/scripts/toggle_nightlight.sh"
@@ -160,7 +159,6 @@ hl.bind("ALT + SHIFT + Tab", function()
     hl.dispatch(hl.dsp.window.cycle_next({ prev = true }))
     hl.dispatch(hl.dsp.window.bring_active_to_top())
 end)
-hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd(win_switcher))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd(file_search))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(filemanager))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(filemgr_cli))
