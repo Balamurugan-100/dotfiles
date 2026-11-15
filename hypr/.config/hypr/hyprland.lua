@@ -160,50 +160,95 @@ hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.window.float({ action = "toggle" }
 hl.bind(mainMod .. " + P", hl.dsp.window.pin({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("hyprctl dispatch exit"))
 
+-- Config Reload (Super + Shift + R)
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload && notify-send -a 'Hyprland' 'Config Reloaded' 'hyprland.lua applied successfully.'"))
+
 -- Lock Screen (Super + Control + Shift + L)
 hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
 
--- ── COSMIC-Style Smart Navigation (Directional + Edge Wrap) ────────
-local function smart_focus(direction, cycle_prev)
+-- ── COSMIC-Style Smart Window & Workspace Switching ────────────────
+-- If 1 window per screen, switches directly between app screens / workspaces!
+-- If multiple windows on screen, moves focus between them and wraps across screens!
+local function smart_switch(direction, cycle_prev)
+    local ws = hl.get_active_workspace()
+    local wins = hl.get_workspace_windows(ws)
+
+    -- Single app on screen: switch to next/prev screen/workspace immediately
+    if #wins <= 1 then
+        if cycle_prev then
+            hl.dispatch(hl.dsp.focus({ workspace = "e-1" }))
+        else
+            hl.dispatch(hl.dsp.focus({ workspace = "e+1" }))
+        end
+        return
+    end
+
+    -- Multiple windows: try directional focus first
     local before = hl.get_window("active")
     hl.dispatch(hl.dsp.focus({ direction = direction }))
     local after = hl.get_window("active")
+
+    -- Hit the edge/boundary of windows on screen: switch to next/prev screen!
     if not before or not after or before == after then
-        hl.dispatch(hl.dsp.window.cycle_next({ prev = cycle_prev }))
+        if cycle_prev then
+            hl.dispatch(hl.dsp.focus({ workspace = "e-1" }))
+        else
+            hl.dispatch(hl.dsp.focus({ workspace = "e+1" }))
+        end
     end
 end
 
-local function smart_move(direction)
+local function smart_move(direction, cycle_prev)
+    local ws = hl.get_active_workspace()
+    local wins = hl.get_workspace_windows(ws)
+
+    if #wins <= 1 then
+        if cycle_prev then
+            hl.dispatch(hl.dsp.window.move({ workspace = "e-1" }))
+            hl.dispatch(hl.dsp.focus({ workspace = "e-1" }))
+        else
+            hl.dispatch(hl.dsp.window.move({ workspace = "e+1" }))
+            hl.dispatch(hl.dsp.focus({ workspace = "e+1" }))
+        end
+        return
+    end
+
     local before = hl.get_window("active")
     hl.dispatch(hl.dsp.window.move({ direction = direction }))
     local after = hl.get_window("active")
     if not before or not after or before == after then
-        hl.dispatch(hl.dsp.window.swap({ direction = direction }))
+        if cycle_prev then
+            hl.dispatch(hl.dsp.window.move({ workspace = "e-1" }))
+            hl.dispatch(hl.dsp.focus({ workspace = "e-1" }))
+        else
+            hl.dispatch(hl.dsp.window.move({ workspace = "e+1" }))
+            hl.dispatch(hl.dsp.focus({ workspace = "e+1" }))
+        end
     end
 end
 
--- Focus navigation (Super + H/L/K/J)
-hl.bind(mainMod .. " + H", function() smart_focus("left", true) end)
-hl.bind(mainMod .. " + L", function() smart_focus("right", false) end)
-hl.bind(mainMod .. " + K", function() smart_focus("up", true) end)
-hl.bind(mainMod .. " + J", function() smart_focus("down", false) end)
+-- Window / Screen Switching (Super + H/L/K/J)
+hl.bind(mainMod .. " + H", function() smart_switch("left", true) end)
+hl.bind(mainMod .. " + L", function() smart_switch("right", false) end)
+hl.bind(mainMod .. " + K", function() smart_switch("up", true) end)
+hl.bind(mainMod .. " + J", function() smart_switch("down", false) end)
 
--- Move window (Super + Shift + H/L/K/J)
-hl.bind(mainMod .. " + SHIFT + H", function() smart_move("left") end)
-hl.bind(mainMod .. " + SHIFT + L", function() smart_move("right") end)
-hl.bind(mainMod .. " + SHIFT + K", function() smart_move("up") end)
-hl.bind(mainMod .. " + SHIFT + J", function() smart_move("down") end)
+-- Move Window across Positions / Screens (Super + Shift + H/L/K/J)
+hl.bind(mainMod .. " + SHIFT + H", function() smart_move("left", true) end)
+hl.bind(mainMod .. " + SHIFT + L", function() smart_move("right", false) end)
+hl.bind(mainMod .. " + SHIFT + K", function() smart_move("up", true) end)
+hl.bind(mainMod .. " + SHIFT + J", function() smart_move("down", false) end)
 
 -- Fallback Arrow Keys Navigation
-hl.bind(mainMod .. " + left",  function() smart_focus("left", true) end)
-hl.bind(mainMod .. " + right", function() smart_focus("right", false) end)
-hl.bind(mainMod .. " + up",    function() smart_focus("up", true) end)
-hl.bind(mainMod .. " + down",  function() smart_focus("down", false) end)
+hl.bind(mainMod .. " + left",  function() smart_switch("left", true) end)
+hl.bind(mainMod .. " + right", function() smart_switch("right", false) end)
+hl.bind(mainMod .. " + up",    function() smart_switch("up", true) end)
+hl.bind(mainMod .. " + down",  function() smart_switch("down", false) end)
 
-hl.bind(mainMod .. " + SHIFT + left",  function() smart_move("left") end)
-hl.bind(mainMod .. " + SHIFT + right", function() smart_move("right") end)
-hl.bind(mainMod .. " + SHIFT + up",    function() smart_move("up") end)
-hl.bind(mainMod .. " + SHIFT + down",  function() smart_move("down") end)
+hl.bind(mainMod .. " + SHIFT + left",  function() smart_move("left", true) end)
+hl.bind(mainMod .. " + SHIFT + right", function() smart_move("right", false) end)
+hl.bind(mainMod .. " + SHIFT + up",    function() smart_move("up", true) end)
+hl.bind(mainMod .. " + SHIFT + down",  function() smart_move("down", false) end)
 
 -- Workspaces 1-10
 for i = 1, 10 do

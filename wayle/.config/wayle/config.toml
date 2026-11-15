@@ -56,13 +56,14 @@ dropdown-freeze-label = true
 
 [[bar.layout]]
 monitor = "*"
-show = false
+show = true
 left = ["hyprland-workspaces", "window-title"]
 center = ["clock"]
 right = [
     "volume",
     "brightness",
     "network",
+    "bluetooth",
     "battery",
     "power",
 ]
@@ -98,7 +99,7 @@ active-color = "accent"
 occupied-color = "fg-default"
 empty-color = "fg-muted"
 container-bg-color = "bg-surface"
-border-show = false
+border-show = true
 
 [modules.window-title]
 show-icon = false
