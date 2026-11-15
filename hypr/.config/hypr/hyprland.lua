@@ -115,13 +115,7 @@ hl.animation({ leaf = "fade",       enabled = true,  speed = 2.0, bezier = "almo
 hl.animation({ leaf = "workspaces", enabled = true,  speed = 2.5, bezier = "easeOutQuint", style = "slide" })
 
 -- ── Autostart ──────────────────────────────────────────────────────
-hl.exec_cmd("/usr/libexec/hyprpolkitagent || /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
-hl.exec_cmd("hyprpaper")
-hl.exec_cmd("wayle shell")
-hl.exec_cmd("hypridle")
-hl.exec_cmd("systemctl --user start vicinae.service || vicinae server")
-hl.exec_cmd("wl-paste --type text --watch cliphist store")
-hl.exec_cmd("wl-paste --type image --watch cliphist store")
+hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/autostart.sh")
 
 -- ── Applications & Native Vicinae Tools ─────────────────────────────
 local mainMod = "SUPER"
@@ -154,6 +148,10 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(filemgr_cli))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(editor_gui))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor_cli))
 hl.bind(mainMod .. " + CTRL + N", hl.dsp.exec_cmd(nightlight))
+
+-- Topbar Menubar Toggle (Mac-style show/hide)
+hl.bind(mainMod .. " + Backspace", hl.dsp.exec_cmd("wayle panel toggle"))
+hl.bind(mainMod .. " + ALT + B", hl.dsp.exec_cmd("wayle panel toggle"))
 
 -- Window Management
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
