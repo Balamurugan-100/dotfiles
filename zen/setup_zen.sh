@@ -17,7 +17,8 @@ warn() { echo -e "${YELLOW}[WARN]${NC} $*"; }
 candidate_roots=(
     "$HOME/.var/app/app.zen_browser.zen/.zen"
     "$HOME/.zen"
-    "$HOME/.mozilla/firefox"
+    "$HOME/Library/Application Support/zen/Profiles"
+    "$HOME/Library/Application Support/Zen/Profiles"
 )
 
 found_profile=0

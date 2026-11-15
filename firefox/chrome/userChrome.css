@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Catppuccin Mocha Theme for Firefox
+   ========================================================================== */
+
+:root {
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7;
+  --ctp-red: #f38ba8;
+  --ctp-maroon: #eba0ac;
+  --ctp-peach: #fab387;
+  --ctp-yellow: #f9e2af;
+  --ctp-green: #a6e3a1;
+  --ctp-teal: #94e2d5;
+  --ctp-sky: #89dceb;
+  --ctp-sapphire: #74c7ec;
+  --ctp-blue: #89b4fa;
+  --ctp-lavender: #b4befe;
+  --ctp-text: #cdd6f4;
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+  --ctp-overlay2: #9399b2;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay0: #6c7086;
+  --ctp-surface2: #585b70;
+  --ctp-surface1: #45475a;
+  --ctp-surface0: #313244;
+  --ctp-base: #1e1e2e;
+  --ctp-mantle: #181825;
+  --ctp-crust: #11111b;
+
+  --toolbar-bgcolor: var(--ctp-mantle) !important;
+  --toolbar-color: var(--ctp-text) !important;
+  --tab-selected-bgcolor: var(--ctp-surface0) !important;
+  --tab-selected-textcolor: var(--ctp-mauve) !important;
+  --toolbar-field-background-color: var(--ctp-base) !important;
+  --toolbar-field-color: var(--ctp-text) !important;
+  --toolbar-field-border-color: var(--ctp-surface0) !important;
+  --toolbar-field-focus-border-color: var(--ctp-mauve) !important;
+}
+
+#browser, #navigator-toolbox, #sidebar-box {
+  background-color: var(--ctp-mantle) !important;
+}
+
+#urlbar-background {
+  background-color: var(--ctp-base) !important;
+  border: 1px solid var(--ctp-surface0) !important;
+  border-radius: 8px !important;
+}
+
+#urlbar[focused="true"] > #urlbar-background {
+  border-color: var(--ctp-mauve) !important;
+  box-shadow: 0 0 0 1px var(--ctp-mauve) !important;
+}
+
+.tab-background[selected="true"] {
+  background-color: var(--ctp-surface0) !important;
+  border: 1px solid var(--ctp-surface1) !important;
+  border-radius: 6px !important;
+}
+
+.tab-background {
+  transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}

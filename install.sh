@@ -122,11 +122,18 @@ info "Stowing packages..."
 
 # All packages are laid out as .config/<name> (or dotfiles at the root),
 # so they all stow into $HOME.
-packages=(
-    nvim kitty tmux lazygit mise btop
-    zed atuin oh-my-posh
-    zsh git hypr wayle vicinae
-)
+if [[ "$(uname)" == "Darwin" ]]; then
+    packages=(
+        aerospace nvim kitty tmux lazygit mise btop
+        zed atuin oh-my-posh zsh git
+    )
+else
+    packages=(
+        nvim kitty tmux lazygit mise btop
+        zed atuin oh-my-posh
+        zsh git hypr wayle vicinae
+    )
+fi
 
 for pkg in "${packages[@]}"; do
     if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
@@ -163,10 +170,14 @@ if command -v nvim &>/dev/null; then
     nvim --headless "+Lazy! sync" +qa 2>/dev/null || warn "Neovim plugin sync skipped"
 fi
 
-# ─── 8. Zen / Browser Profile ──────────────────────────────────────────────
+# ─── 8. Zen & Firefox Browser Profiles ─────────────────────────────────────
 if [[ -f "$DOTFILES_DIR/zen/setup_zen.sh" ]]; then
     chmod +x "$DOTFILES_DIR/zen/setup_zen.sh"
     "$DOTFILES_DIR/zen/setup_zen.sh" || true
+fi
+if [[ -f "$DOTFILES_DIR/firefox/setup_firefox.sh" ]]; then
+    chmod +x "$DOTFILES_DIR/firefox/setup_firefox.sh"
+    "$DOTFILES_DIR/firefox/setup_firefox.sh" || true
 fi
 
 # ─── 9. Post-install ────────────────────────────────────────────────────────

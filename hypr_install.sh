@@ -146,11 +146,16 @@ done
 # Ensure all helper scripts have execute permissions
 chmod +x "${DOTFILES_DIR}/hypr/.config/hypr/scripts/"*.sh 2>/dev/null || true
 chmod +x "${DOTFILES_DIR}/zen/setup_zen.sh" 2>/dev/null || true
+chmod +x "${DOTFILES_DIR}/firefox/setup_firefox.sh" 2>/dev/null || true
 
-# Apply Zen browser Catppuccin profile
+# Apply Zen & Firefox browser Catppuccin profiles
 if [[ -f "${DOTFILES_DIR}/zen/setup_zen.sh" ]]; then
     info "Applying Zen browser Catppuccin profile..."
     "${DOTFILES_DIR}/zen/setup_zen.sh" || true
+fi
+if [[ -f "${DOTFILES_DIR}/firefox/setup_firefox.sh" ]]; then
+    info "Applying Firefox Catppuccin profile..."
+    "${DOTFILES_DIR}/firefox/setup_firefox.sh" || true
 fi
 
 # ── 7. Verify Configuration ───────────────────────────────────────
