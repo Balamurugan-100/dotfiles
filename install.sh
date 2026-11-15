@@ -107,11 +107,8 @@ remove_if_not_symlink "$HOME/.bash_functions"
 remove_if_not_symlink "$HOME/.gitconfig"
 remove_if_not_symlink "$HOME/.gitignore_global"
 remove_if_not_symlink "$HOME/.tmux.conf"
-remove_if_not_symlink "$HOME/.taskrc"
-remove_if_not_symlink "$HOME/.profile"
-
 # .config directory symlinks
-for dir in nvim kitty tmux tmuxp starship ghostty lazygit mise btop aerospace shell broot cava zed atuin doom oh-my-posh hypr wayle; do
+for dir in nvim kitty tmux lazygit mise btop zed atuin oh-my-posh hypr wayle vicinae zen; do
     remove_if_not_symlink "$HOME/.config/$dir"
 done
 
@@ -126,9 +123,9 @@ info "Stowing packages..."
 # All packages are laid out as .config/<name> (or dotfiles at the root),
 # so they all stow into $HOME.
 packages=(
-    nvim kitty tmux tmuxp starship ghostty lazygit mise btop
-    aerospace shell broot cava zed atuin doom oh-my-posh
-    bash zsh git task profile hypr wayle
+    nvim kitty tmux lazygit mise btop
+    zed atuin oh-my-posh
+    zsh git hypr wayle vicinae
 )
 
 for pkg in "${packages[@]}"; do
@@ -147,17 +144,7 @@ mise install
 # Make mise-managed tools available to the rest of this script
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
-# ─── 6. Create secrets files if they don't exist ─────────────────────────────
-BASH_SECRETS_FILE="$HOME/.config/bash/secrets.sh"
-if [[ ! -f "$BASH_SECRETS_FILE" ]]; then
-    info "Creating bash secrets.sh from template..."
-    mkdir -p "$(dirname "$BASH_SECRETS_FILE")"
-    cp "$DOTFILES_DIR/bash/.config/bash/secrets.sh.template" "$BASH_SECRETS_FILE"
-    chmod 600 "$BASH_SECRETS_FILE"
-    warn "Please edit $BASH_SECRETS_FILE with your actual API keys and tokens"
-fi
-
-# ─── 7. TPM (Tmux Plugin Manager) ────────────────────────────────────────────
+# ─── 6. TPM (Tmux Plugin Manager) ────────────────────────────────────────────
 TPM_DIR="$HOME/.tmux/plugins/tpm"
 if command -v tmux &>/dev/null; then
     if [[ ! -d "$TPM_DIR" ]]; then
@@ -176,15 +163,19 @@ if command -v nvim &>/dev/null; then
     nvim --headless "+Lazy! sync" +qa 2>/dev/null || warn "Neovim plugin sync skipped"
 fi
 
+# ─── 8. Zen / Browser Profile ──────────────────────────────────────────────
+if [[ -f "$DOTFILES_DIR/zen/setup_zen.sh" ]]; then
+    chmod +x "$DOTFILES_DIR/zen/setup_zen.sh"
+    "$DOTFILES_DIR/zen/setup_zen.sh" || true
+fi
+
 # ─── 9. Post-install ────────────────────────────────────────────────────────
 echo ""
 info "✅ Dotfiles setup complete!"
 echo ""
 echo "  Packages stowed: ${#packages[@]}"
-echo "  Secrets file:    $BASH_SECRETS_FILE"
 echo ""
 echo "  Next steps:"
-echo "    1. Edit the secrets file with your API keys"
-echo "    2. Restart your terminal"
-echo "    3. Run 'tmux source ~/.config/tmux/tmux.conf' to reload tmux"
+echo "    1. Restart your terminal"
+echo "    2. Run 'tmux source ~/.config/tmux/tmux.conf' to reload tmux"
 echo ""

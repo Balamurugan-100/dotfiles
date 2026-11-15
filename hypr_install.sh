@@ -136,7 +136,7 @@ fi
 
 # ── 6. Stow Dotfiles ──────────────────────────────────────────────
 step "6. Stowing Hyprland and Wayle configurations..."
-for pkg in hypr wayle; do
+for pkg in hypr wayle vicinae; do
     if [[ -d "${DOTFILES_DIR}/${pkg}" ]]; then
         info "Stowing ${pkg} → ~/..."
         stow -v -d "${DOTFILES_DIR}" -t "${HOME}" --restow "${pkg}" 2>&1 | tail -1
@@ -145,6 +145,13 @@ done
 
 # Ensure all helper scripts have execute permissions
 chmod +x "${DOTFILES_DIR}/hypr/.config/hypr/scripts/"*.sh 2>/dev/null || true
+chmod +x "${DOTFILES_DIR}/zen/setup_zen.sh" 2>/dev/null || true
+
+# Apply Zen browser Catppuccin profile
+if [[ -f "${DOTFILES_DIR}/zen/setup_zen.sh" ]]; then
+    info "Applying Zen browser Catppuccin profile..."
+    "${DOTFILES_DIR}/zen/setup_zen.sh" || true
+fi
 
 # ── 7. Verify Configuration ───────────────────────────────────────
 step "7. Verifying Hyprland and Wayle configurations..."
