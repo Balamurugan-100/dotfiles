@@ -57,7 +57,7 @@ dropdown-freeze-label = true
 [[bar.layout]]
 monitor = "*"
 show = true
-left = ["hyprland-workspaces", "window-title"]
+left = ["niri-workspaces", "hyprland-workspaces", "window-title"]
 center = ["clock"]
 right = [
     "volume",
