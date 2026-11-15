@@ -5,10 +5,17 @@
 
 -- ── Monitors ────────────────────────────────────────────────────────
 hl.monitor({
+    output   = "eDP-1",
+    mode     = "1920x1080@144",
+    position = "auto",
+    scale    = 1.0,
+})
+
+hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
-    scale    = "auto",
+    scale    = 1.0,
 })
 
 -- ── Environment Variables ──────────────────────────────────────────
@@ -153,6 +160,7 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(filemgr_cli))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(editor_gui))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor_cli))
 hl.bind(mainMod .. " + CTRL + N", hl.dsp.exec_cmd(nightlight))
+hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(home .. "/.local/bin/wayle-settings"))
 
 -- Topbar Menubar Toggle (Mac-style show/hide)
 hl.bind(mainMod .. " + Backspace", hl.dsp.exec_cmd(wayle_toggle))
@@ -286,8 +294,9 @@ hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl set 5%-"),       
 -- ── Window & Layer Rules ───────────────────────────────────────────
 hl.window_rule({
     name  = "float-utils",
-    match = { class = "^(pavucontrol|blueman-manager|nm-connection-editor|org.gnome.Calculator|wayle-settings)$" },
+    match = { class = "^(pavucontrol|blueman-manager|nm-connection-editor|org.gnome.Calculator|com.wayle.settings|wayle-settings)$" },
     float = true,
+    center = true,
 })
 
 hl.window_rule({
