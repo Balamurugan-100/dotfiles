@@ -42,8 +42,10 @@ Both **Hyprland** (Linux) and **AeroSpace** (macOS) share identical ergonomics:
 | **GUI Editor (Zed)** | <kbd>Super</kbd> + <kbd>Z</kbd> | <kbd>Alt</kbd> + <kbd>Z</kbd> |
 | **AI Agent (OpenCode)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> |
 | **Cycle Windows** | <kbd>Alt</kbd> + <kbd>Tab</kbd> (Native cycling) | <kbd>Alt</kbd> + <kbd>Tab</kbd> (Native cycling) |
-| **Focus Window (Vim)** | <kbd>Super</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> | <kbd>Alt</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> |
-| **Move Window (Vim)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> |
+| **Prev / Next Workspace** | <kbd>Super</kbd> + <kbd>H</kbd> / <kbd>L</kbd> | <kbd>Alt</kbd> + <kbd>H</kbd> / <kbd>L</kbd> |
+| **Focus Window (Vim)** | <kbd>Super</kbd> + <kbd>J</kbd> / <kbd>K</kbd> | <kbd>Alt</kbd> + <kbd>J</kbd> / <kbd>K</kbd> |
+| **Move Window to Prev / Next WS & Follow** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> / <kbd>L</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>H</kbd> / <kbd>L</kbd> |
+| **Move Window (Vim)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd> / <kbd>K</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd> / <kbd>K</kbd> |
 | **Switch Workspace 1-10** | <kbd>Super</kbd> + <kbd>1</kbd> .. <kbd>0</kbd> | <kbd>Alt</kbd> + <kbd>1</kbd> .. <kbd>0</kbd> |
 | **Move Window to WS 1-10**| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> .. <kbd>0</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> .. <kbd>0</kbd> |
 | **Close Window** | <kbd>Super</kbd> + <kbd>Q</kbd> | <kbd>Alt</kbd> + <kbd>Q</kbd> |
