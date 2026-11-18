@@ -2,7 +2,7 @@
 version = 4
 final_space = true
 
-# Catppuccin Mocha — developer HUD
+# NEON//SHINOBI — developer HUD
 
 # ── MAIN PROMPT ────────────────────────────────────────────
 
@@ -15,20 +15,20 @@ newline = false
 [[blocks.segments]]
 type = "text"
 style = "plain"
-foreground = "#cba6f7"
+foreground = "#F472B6"
 template = " 󰀄 {{ .UserName }} "
 
 [[blocks.segments]]
 type = "text"
 style = "plain"
-foreground = "#45475a"
+foreground = "#334155"
 template = "│ "
 
 # Directory
 [[blocks.segments]]
 type = "path"
 style = "plain"
-foreground = "#89b4fa"
+foreground = "#22D3EE"
 template = " {{ .Path }} "
 
 [blocks.segments.options]
@@ -39,20 +39,21 @@ max_depth = 3
 [[blocks.segments]]
 type = "git"
 style = "plain"
-foreground = "#b4befe"
-template = " {{ .HEAD }}{{ if .Working.Changed }} <#f9e2af>●</>{{ end }}{{ if .Staging.Changed }} <#a6e3a1>✓</>{{ end }}{{ if .Behind }} <#f38ba8>↓{{ .Behind }}</>{{ end }}{{ if .Ahead }} <#a6e3a1>↑{{ .Ahead }}</>{{ end }} "
+foreground = "#A78BFA"
+template = " {{ .HEAD }}{{ if .Working.Changed }} <#FBBF24>●</>{{ end }}{{ if .Staging.Changed }} <#34D399>✓</>{{ end }}{{ if .Behind }} <#F87171>↓{{ .Behind }}</>{{ end }}{{ if .Ahead }} <#34D399>↑{{ .Ahead }}</>{{ end }} "
 
 [blocks.segments.options]
 branch_icon = ""
 fetch_status = true
 
 # ── LANGUAGE / ENVIRONMENT INDICATORS ─────────────────────
+# These appear when relevant to the current project.
 
 # Python + active virtualenv
 [[blocks.segments]]
 type = "python"
 style = "plain"
-foreground = "#f9e2af"
+foreground = "#FBBF24"
 template = " {{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }} "
 
 [blocks.segments.options]
@@ -64,7 +65,7 @@ display_default = false
 [[blocks.segments]]
 type = "go"
 style = "plain"
-foreground = "#74c7ec"
+foreground = "#22D3EE"
 template = " {{ .Full }} "
 
 [blocks.segments.options]
@@ -74,7 +75,7 @@ display_mode = "context"
 [[blocks.segments]]
 type = "rust"
 style = "plain"
-foreground = "#fab387"
+foreground = "#F97316"
 template = " {{ .Full }} "
 
 [blocks.segments.options]
@@ -84,7 +85,7 @@ display_mode = "context"
 [[blocks.segments]]
 type = "node"
 style = "plain"
-foreground = "#a6e3a1"
+foreground = "#A6E3A1"
 template = " {{ .Full }}{{ if .PackageManagerIcon }} {{ .PackageManagerIcon }}{{ end }} "
 
 [blocks.segments.options]
@@ -95,7 +96,7 @@ fetch_package_manager = true
 [[blocks.segments]]
 type = "bun"
 style = "plain"
-foreground = "#f9e2af"
+foreground = "#F9E2AF"
 template = " {{ .Full }} "
 
 [blocks.segments.options]
@@ -107,25 +108,26 @@ display_mode = "context"
 type = "rprompt"
 alignment = "right"
 
-# Execution time for previous command
+# Execution time for the previous command
 [[blocks.segments]]
 type = "executiontime"
 style = "plain"
-foreground = "#fab387"
+foreground = "#FBBF24"
 template = "◷ {{ .FormattedMs }} "
 
 [blocks.segments.options]
 threshold = 2000
 
-# Exit status code on failure
+# Show failures, not a fake ONLINE status
 [[blocks.segments]]
 type = "status"
 style = "plain"
-foreground = "#f38ba8"
+foreground = "#F87171"
 template = "{{ if ne .Code 0 }}✘ {{ .Code }} {{ end }}"
 
 [blocks.segments.options]
 always_enabled = true
+
 
 # ── COMMAND LINE ──────────────────────────────────────────
 
@@ -137,5 +139,5 @@ newline = true
 [[blocks.segments]]
 type = "text"
 style = "plain"
-foreground = "#cba6f7"
+foreground = "#22D3EE"
 template = "╰─ ❯ "

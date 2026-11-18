@@ -168,7 +168,7 @@ dotfiles/
 ├── lazygit/              # TUI git client with Catppuccin Mocha theme
 ├── mise/                 # Polyglot runtimes & CLI tools config
 ├── nvim/                 # Neovim (Lazy.nvim, transparent Catppuccin Mocha)
-├── oh-my-posh/           # Catppuccin Mocha prompt theme
+├── oh-my-posh/           # NEON//SHINOBI prompt theme (zen.toml)
 ├── opencode/             # AI agent CLI configuration
 ├── tmux/                 # Tmux with Catppuccin & Wayland clipboard
 ├── vicinae/              # Raycast-style launcher, clipboard, and emoji selector
