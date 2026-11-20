@@ -1,4 +1,7 @@
 {
+  "outline_panel": {
+    "button": false
+  },
   "active_pane_modifiers": {
     "inactive_opacity": 0.9
   },
@@ -68,7 +71,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Mocha"
+    "dark": "Duskfox - blurred"
   },
   "agent_servers": {
     "antigravity-acp": {

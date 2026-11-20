@@ -29,7 +29,7 @@ A modern, minimal, keyboard-driven dotfiles ecosystem unified under the **Catppu
 Both **Hyprland** (Linux) and **AeroSpace** (macOS) share identical ergonomics:
 * On Linux: <kbd>Super</kbd> (Windows key) is the modifier.
 * On macOS: <kbd>Alt</kbd> (Option key) is the modifier.
-* Workspaces are strictly **numbered 1 to 10** across both environments.
+* Workspaces **1-10** are shared across both environments; macOS (AeroSpace) adds extra letter workspaces.
 
 | Action | Linux (Hyprland) | macOS (AeroSpace) |
 | :--- | :--- | :--- |
@@ -48,6 +48,8 @@ Both **Hyprland** (Linux) and **AeroSpace** (macOS) share identical ergonomics:
 | **Move Window (Vim)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd> / <kbd>K</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd> / <kbd>K</kbd> |
 | **Switch Workspace 1-10** | <kbd>Super</kbd> + <kbd>1</kbd> .. <kbd>0</kbd> | <kbd>Alt</kbd> + <kbd>1</kbd> .. <kbd>0</kbd> |
 | **Move Window to WS 1-10**| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> .. <kbd>0</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> .. <kbd>0</kbd> |
+| **Switch Letter WS (A,D,E,G,I,M,N,O,P,S,U,W,X,Y)** | N/A | <kbd>Alt</kbd> + <kbd>letter</kbd> |
+| **Move Window to Letter WS & Follow** | N/A | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>letter</kbd> |
 | **Close Window** | <kbd>Super</kbd> + <kbd>Q</kbd> | <kbd>Alt</kbd> + <kbd>Q</kbd> |
 | **Toggle Fullscreen** | <kbd>Super</kbd> + <kbd>F</kbd> | <kbd>Alt</kbd> + <kbd>F</kbd> |
 | **Toggle Float / Tile** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd> | <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd> |

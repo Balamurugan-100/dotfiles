@@ -1,6 +1,7 @@
 # ==============================================================================
 # AeroSpace — Minimal Keyboard-Driven Tiling Window Manager for macOS
-# Aligned 1:1 with Hyprland workflow & numbered workspaces (1-10)
+# Aligned 1:1 with Hyprland workflow; numbered workspaces (1-10) plus
+# extra letter workspaces on macOS
 # ==============================================================================
 
 config-version = 2
@@ -83,6 +84,39 @@ alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
+
+# ── Extra Letter Workspaces ──────────────────────────────────────────────────
+# Free letters only (t, b, z, c, v, q, f, h, j, k, l, r are taken by apps/actions)
+alt-a = 'workspace A'
+alt-d = 'workspace D'
+alt-e = 'workspace E'
+alt-g = 'workspace G'
+alt-i = 'workspace I'
+alt-m = 'workspace M'
+alt-n = 'workspace N'
+alt-o = 'workspace O'
+alt-p = 'workspace P'
+alt-s = 'workspace S'
+alt-u = 'workspace U'
+alt-w = 'workspace W'
+alt-x = 'workspace X'
+alt-y = 'workspace Y'
+
+# ── Move Node to Letter Workspace & Follow ───────────────────────────────────
+alt-shift-a = ['move-node-to-workspace A', 'workspace A']
+alt-shift-d = ['move-node-to-workspace D', 'workspace D']
+alt-shift-e = ['move-node-to-workspace E', 'workspace E']
+alt-shift-g = ['move-node-to-workspace G', 'workspace G']
+alt-shift-i = ['move-node-to-workspace I', 'workspace I']
+alt-shift-m = ['move-node-to-workspace M', 'workspace M']
+alt-shift-n = ['move-node-to-workspace N', 'workspace N']
+alt-shift-o = ['move-node-to-workspace O', 'workspace O']
+alt-shift-p = ['move-node-to-workspace P', 'workspace P']
+alt-shift-s = ['move-node-to-workspace S', 'workspace S']
+alt-shift-u = ['move-node-to-workspace U', 'workspace U']
+alt-shift-w = ['move-node-to-workspace W', 'workspace W']
+alt-shift-x = ['move-node-to-workspace X', 'workspace X']
+alt-shift-y = ['move-node-to-workspace Y', 'workspace Y']
 
 # ── Workspace / Monitor Quick Toggle ─────────────────────────────────────────
 alt-tab       = 'workspace-back-and-forth'
